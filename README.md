@@ -4,7 +4,7 @@ This is a simple personal financial management app, built with **React Native** 
 
 # How to run
 
-Gotta have npm or yarn installed.
+Gotta have **npm** or **yarn** installed.
 
 Run `yarn start` or `npm start`
 
