@@ -1,8 +1,8 @@
-#About
+# About
 
 This is a simple personal financial management app, built with **React Native** to practice my mobile skills.
 
-#How to run
+# How to run
 
 Gotta have npm or yarn installed.
 
