@@ -3,6 +3,7 @@ import styles from '~/components/Dashboard/styles';
 import { Card } from '~/components/Dashboard/Card';
 import { AntDesign } from '@expo/vector-icons';
 import { colors } from '~/styles/colors';
+import { Table } from '~/components/Table';
 
 export const Dashboard: React.FC = () => {
     return (
@@ -21,6 +22,9 @@ export const Dashboard: React.FC = () => {
                     <AntDesign name='arrowdown' size={40} color={colors.red} />
                 }
             />
+            <View>
+                <Table />
+            </View>
         </View>
     );
 };
