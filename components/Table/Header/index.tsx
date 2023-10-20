@@ -1,21 +1,18 @@
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import { HeaderCell } from '~/components/Table/Header/Cell';
 import styles from '~/components/Table/Header/styles';
+import { TableColumns } from '~/components/Table/types';
 
-export const Header: React.FC = () => {
+interface Props {
+    columns: TableColumns;
+}
+
+export const Header: React.FC<Props> = ({ columns }) => {
     return (
         <View style={styles.headerContainer}>
-            <View style={styles.headerItem}>
-                <Text>Header 1</Text>
-            </View>
-            <View style={styles.headerItem}>
-                <Text>Header 2</Text>
-            </View>
-            <View style={styles.headerItem}>
-                <Text>Header 3</Text>
-            </View>
-            <View style={styles.headerItem}>
-                <Text>Header 4</Text>
-            </View>
+            {columns?.map((item) => {
+                return <HeaderCell key={item.title} text={item.title} />;
+            })}
         </View>
     );
 };
