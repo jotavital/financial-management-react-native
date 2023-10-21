@@ -12,6 +12,7 @@ module.exports = function (api) {
                         '~/styles': './src/styles',
                         '~/models': './src/models',
                         '~/utils': './src/utils',
+                        '~/screens': './src/screens',
                     },
                 },
             ],
