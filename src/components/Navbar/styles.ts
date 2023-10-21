@@ -7,18 +7,11 @@ const styles = StyleSheet.create({
         backgroundColor: colors.blue,
         display: 'flex',
         flexDirection: 'row',
-        gap: 5
-    },
-    avatarContainer: {
-        width: '15%',
-        height: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
     },
     titleContainer: {
         display: 'flex',
         justifyContent: 'center',
+        paddingLeft: 20
     },
     title: {
         fontSize: 23,

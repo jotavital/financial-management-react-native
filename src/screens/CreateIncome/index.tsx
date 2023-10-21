@@ -1,9 +1,7 @@
-import { Text, View } from 'react-native';
+import { CreateIncome } from '~/components/CreateIncome';
 
 export const CreateIncomeScreen: React.FC = () => {
     return (
-        <View>
-            <Text>Que top</Text>
-        </View>
+        <CreateIncome />
     );
 };

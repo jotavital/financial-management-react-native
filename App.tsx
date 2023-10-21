@@ -57,6 +57,7 @@ export default function App() {
                                 />
                             ),
                             tabBarLabel: 'Nova Receita',
+                            headerTitle: 'Nova Receita',
                         }}
                     />
                     <Tab.Screen
@@ -71,6 +72,22 @@ export default function App() {
                                 />
                             ),
                             tabBarLabel: 'Nova Despesa',
+                            headerTitle: 'Nova Despesa',
+                        }}
+                    />
+                    <Tab.Screen
+                        name='Settings'
+                        component={CreateOutcomeScreen}
+                        options={{
+                            tabBarIcon: ({ color }) => (
+                                <AntDesign
+                                    name='setting'
+                                    size={24}
+                                    color={color}
+                                />
+                            ),
+                            tabBarLabel: 'Configurações',
+                            headerTitle: 'Configurações',
                         }}
                     />
                 </Tab.Navigator>
