@@ -20,6 +20,12 @@ export const Dashboard: React.FC = () => {
                 return <Text>{item?.name}</Text>;
             },
         },
+        {
+            title: 'Age',
+            render: (item) => {
+                return <Text>{item?.age}</Text>;
+            },
+        },
     ];
 
     // TODO: tipar
@@ -27,18 +33,22 @@ export const Dashboard: React.FC = () => {
         {
             id: 1,
             name: 'joão',
+            age: 23,
         },
         {
             id: 2,
             name: 'maria',
+            age: 23,
         },
         {
             id: 3,
             name: 'bia',
+            age: 23,
         },
         {
             id: 4,
             name: 'juca',
+            age: 23,
         },
     ];
 

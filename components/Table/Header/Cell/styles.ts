@@ -8,7 +8,8 @@ const styles = StyleSheet.create({
         height: 'auto',
         display: 'flex',
         padding: 10,
-        width: '50%',
+        flexGrow: 1,
+        flexBasis: 0
     },
 });
 
