@@ -7,13 +7,19 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     cell: {
-        borderColor: colors.darkGray,
-        borderWidth: 0.6,
         height: 'auto',
         display: 'flex',
         padding: 10,
         flexGrow: 1,
-        flexBasis: 0
+        flexBasis: 0,
+    },
+    borderRight: {
+        borderRightColor: colors.darkGray,
+        borderRightWidth: 0.5,
+    },
+    borderBottom: {
+        borderBottomColor: colors.darkGray,
+        borderBottomWidth: 0.5,
     },
 });
 

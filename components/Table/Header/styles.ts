@@ -3,8 +3,6 @@ import { colors } from '~/styles/colors';
 
 const styles = StyleSheet.create({
     headerItem: {
-        borderColor: colors.darkGray,
-        borderWidth: 0.6,
         height: 'auto',
         display: 'flex',
         flexGrow: 1,
@@ -13,6 +11,19 @@ const styles = StyleSheet.create({
     headerContainer: {
         display: 'flex',
         flexDirection: 'row',
+    },
+    headerCell: {
+        height: 'auto',
+        display: 'flex',
+        padding: 10,
+        flexGrow: 1,
+        flexBasis: 0,
+        borderBottomColor: colors.darkGray,
+        borderBottomWidth: 0.5,
+    },
+    borderRight: {
+        borderRightColor: colors.darkGray,
+        borderRightWidth: 0.5,
     },
 });
 

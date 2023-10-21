@@ -1,5 +1,4 @@
-import { View } from 'react-native';
-import { HeaderCell } from '~/components/Table/Header/Cell';
+import { Text, View } from 'react-native';
 import styles from '~/components/Table/Header/styles';
 import { TableColumns } from '~/components/Table/types';
 
@@ -10,8 +9,18 @@ interface Props {
 export const Header: React.FC<Props> = ({ columns }) => {
     return (
         <View style={styles.headerContainer}>
-            {columns?.map((item) => {
-                return <HeaderCell key={item.title} text={item.title} />;
+            {columns?.map((item, index) => {
+                let borderRightStyle =
+                    index !== columns.length - 1 ? styles.borderRight : null;
+
+                return (
+                    <View
+                        key={index}
+                        style={[styles.headerCell, borderRightStyle]}
+                    >
+                        <Text>{item?.title}</Text>
+                    </View>
+                );
             })}
         </View>
     );

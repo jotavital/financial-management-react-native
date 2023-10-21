@@ -9,21 +9,21 @@ import { TableColumns } from '~/components/Table/types';
 export const Dashboard: React.FC = () => {
     const columns: TableColumns = [
         {
-            title: 'ID',
+            title: 'Tipo',
             render: (item) => {
-                return <Text>{item?.id}</Text>;
+                return <Text>{item?.type}</Text>;
             },
         },
         {
-            title: 'Name',
+            title: 'Valor',
             render: (item) => {
-                return <Text>{item?.name}</Text>;
+                return <Text>{item?.amount}</Text>;
             },
         },
         {
-            title: 'Age',
+            title: 'Data',
             render: (item) => {
-                return <Text>{item?.age}</Text>;
+                return <Text>{item?.date}</Text>;
             },
         },
     ];
@@ -31,24 +31,24 @@ export const Dashboard: React.FC = () => {
     // TODO: tipar
     const data: any = [
         {
-            id: 1,
-            name: 'joão',
-            age: 23,
+            type: 'income',
+            amount: 'R$ 5,00',
+            date: '23/07/2022 11:45',
         },
         {
-            id: 2,
-            name: 'maria',
-            age: 23,
+            type: 'income',
+            amount: 'R$ 35,00',
+            date: '23/07/2022 11:45',
         },
         {
-            id: 3,
-            name: 'bia',
-            age: 23,
+            type: 'outcome',
+            amount: 'R$ 1.250,00',
+            date: '23/07/2022 11:45',
         },
         {
-            id: 4,
-            name: 'juca',
-            age: 23,
+            type: 'outcome',
+            amount: 'R$ 250,00',
+            date: '23/07/2022 11:45',
         },
     ];
 
