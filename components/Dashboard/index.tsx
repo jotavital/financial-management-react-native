@@ -5,19 +5,22 @@ import { AntDesign } from '@expo/vector-icons';
 import { colors } from '~/styles/colors';
 import { Table } from '~/components/Table';
 import { TableColumns } from '~/components/Table/types';
+import { formatTransactionType } from '~/utils/string';
+import { centsToBrl } from '~/utils/currency';
 
 export const Dashboard: React.FC = () => {
+    //TODO: colocar em outro arquivo
     const columns: TableColumns = [
         {
             title: 'Tipo',
             render: (item) => {
-                return <Text>{item?.type}</Text>;
+                return <Text>{formatTransactionType(item?.type)}</Text>;
             },
         },
         {
             title: 'Valor',
             render: (item) => {
-                return <Text>{item?.amount}</Text>;
+                return <Text>{centsToBrl(item?.amount)}</Text>;
             },
         },
         {
@@ -31,23 +34,27 @@ export const Dashboard: React.FC = () => {
     // TODO: tipar
     const data: any = [
         {
+            id: 1,
             type: 'income',
-            amount: 'R$ 5,00',
+            amount: '501',
             date: '23/07/2022 11:45',
         },
         {
+            id: 2,
             type: 'income',
-            amount: 'R$ 35,00',
+            amount: '3599',
             date: '23/07/2022 11:45',
         },
         {
+            id: 3,
             type: 'outcome',
-            amount: 'R$ 1.250,00',
+            amount: '125000',
             date: '23/07/2022 11:45',
         },
         {
+            id: 4,
             type: 'outcome',
-            amount: 'R$ 250,00',
+            amount: '1250099',
             date: '23/07/2022 11:45',
         },
     ];

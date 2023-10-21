@@ -6,8 +6,9 @@ const styles = StyleSheet.create({
         minWidth: '100%',
         display: 'flex',
         borderColor: colors.darkGray,
-        borderWidth: 0.6,
+        borderWidth: 0.5,
         borderRadius: 5,
+        backgroundColor: colors.white
     },
 });
 
