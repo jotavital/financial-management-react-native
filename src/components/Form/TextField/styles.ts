@@ -2,6 +2,9 @@ import { StyleSheet } from 'react-native';
 import { colors } from '~/styles/colors';
 
 export const styles = StyleSheet.create({
+    container: {
+        marginBottom: 15,
+    },
     label: {
         fontSize: 17,
         marginBottom: 3,
@@ -11,6 +14,14 @@ export const styles = StyleSheet.create({
         borderWidth: 0.5,
         borderRadius: 5,
         padding: 6,
-        marginBottom: 15,
+    },
+    invalid: {
+        borderColor: colors.red,
+        borderWidth: 0.7,
+        borderRadius: 5,
+        padding: 6,
+    },
+    errors: {
+        color: colors.red,
     },
 });

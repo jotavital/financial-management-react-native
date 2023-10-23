@@ -23,6 +23,9 @@ const styles = StyleSheet.create({
         fontSize: 25,
         fontWeight: 'bold',
     },
+    title: {
+        fontSize: 16,
+    },
     iconContainer: {
         display: 'flex',
         justifyContent: 'center',

@@ -62,6 +62,7 @@ export const Dashboard: React.FC = () => {
     return (
         <View style={styles.container}>
             <Card
+                title='Receitas'
                 text='R$ 4.500,00'
                 color='green'
                 icon={
@@ -69,6 +70,7 @@ export const Dashboard: React.FC = () => {
                 }
             />
             <Card
+                title='Despesas'
                 text='R$ 500,00'
                 color='red'
                 icon={

@@ -1,21 +1,20 @@
-import { Control, Controller } from 'react-hook-form';
+import { Controller, FieldValues, UseControllerProps } from 'react-hook-form';
 import { Text, TextInput, View } from 'react-native';
 import { styles } from '~/components/Form/TextField/styles';
 
 interface Props {
-    name: string;
     label: string;
-    control: Control;
     [x: string]: any;
 }
 
-export const TextField: React.FC<Props> = ({
+export const TextField = <FormType extends FieldValues>({
     name,
     label,
     control,
+    errors,
     ...rest
-}: Props) => (
-    <View>
+}: UseControllerProps<FormType> & Props) => (
+    <View style={styles.container}>
         <Text style={styles.label}>{label}</Text>
 
         <Controller
@@ -25,7 +24,7 @@ export const TextField: React.FC<Props> = ({
             }}
             render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
-                    style={styles.input}
+                    style={[styles.input, errors && styles.invalid]}
                     {...rest}
                     onChangeText={onChange}
                     onBlur={onBlur}
@@ -34,5 +33,7 @@ export const TextField: React.FC<Props> = ({
             )}
             name={name}
         />
+
+        <Text style={styles.errors}>{errors?.message}</Text>
     </View>
 );
