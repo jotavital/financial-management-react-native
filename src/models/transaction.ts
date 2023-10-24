@@ -1,3 +1,3 @@
 export type TransactionType = 'income' | 'outcome';
 
-export type FormattedTransactionType = 'sReceita' | 'Despesa';
+export type FormattedTransactionType = 'Receita' | 'Despesa';
