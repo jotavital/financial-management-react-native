@@ -3,7 +3,7 @@ import { colors } from '~/styles/colors';
 
 export const styles = StyleSheet.create({
     container: {
-        marginBottom: 15,
+        marginBottom: 6,
     },
     label: {
         fontSize: 17,

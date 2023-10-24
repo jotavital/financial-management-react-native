@@ -6,12 +6,14 @@ import { styles } from '~/components/CreateIncome/styles';
 import { TextField } from '~/components/Form/TextField';
 import { colors } from '~/styles/colors';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { DateTimePicker } from '~/components/Form/DateTimePicker';
 
 export const CreateIncome: React.FC = () => {
     const {
         handleSubmit,
         control,
         formState: { errors },
+        setValue
     } = useForm<InferType<typeof createIncomeSchema>>({
         resolver: yupResolver(createIncomeSchema),
     });
@@ -37,6 +39,15 @@ export const CreateIncome: React.FC = () => {
                 keyboardType='numeric'
                 errors={errors.amount}
             />
+            <DateTimePicker
+                name='date'
+                label='Data'
+                placeholder='Data'
+                control={control}
+                errors={errors.date}
+                setValue={setValue}
+            />
+
             <Button
                 onPress={handleSubmit(onSubmit)}
                 title={'Salvar'}
