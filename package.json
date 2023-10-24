@@ -35,6 +35,6 @@
     "private": true,
     "packageManager": "yarn@4.0.0",
     "lint-staged": {
-        "*.{js,css,md}": "prettier --write"
+        "*.{js,css,md,ts,tsx,jsx}": "prettier --write"
     }
 }
