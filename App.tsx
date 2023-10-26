@@ -77,7 +77,7 @@ export default function App() {
                     />
                     <Tab.Screen
                         name='Settings'
-                        component={CreateOutcomeScreen}
+                        component={View}
                         options={{
                             tabBarIcon: ({ color }) => (
                                 <AntDesign

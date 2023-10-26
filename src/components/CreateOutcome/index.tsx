@@ -1,22 +1,22 @@
 import { useForm } from 'react-hook-form';
 import { Button, View, ToastAndroid } from 'react-native';
 import { InferType } from 'yup';
-import { createIncomeSchema } from '~/components/CreateIncome/schema';
 import { styles } from '~/components/CreateIncome/styles';
 import { TextField } from '~/components/Form/TextField';
 import { colors } from '~/styles/colors';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { DateTimePicker } from '~/components/Form/DateTimePicker';
+import { createOutcomeSchema } from '~/components/CreateOutcome/schema';
 
-export const CreateIncome: React.FC = () => {
+export const CreateOutcome: React.FC = () => {
     const {
         handleSubmit,
         control,
         reset,
         formState: { errors },
         setValue,
-    } = useForm<InferType<typeof createIncomeSchema>>({
-        resolver: yupResolver(createIncomeSchema),
+    } = useForm<InferType<typeof createOutcomeSchema>>({
+        resolver: yupResolver(createOutcomeSchema),
     });
 
     const onSubmit = (data: any /* TODO: tipar*/) => {

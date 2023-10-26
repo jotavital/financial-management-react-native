@@ -1,9 +1,5 @@
-import { Text, View } from 'react-native';
+import { CreateOutcome } from '~/components/CreateOutcome';
 
 export const CreateOutcomeScreen: React.FC = () => {
-    return (
-        <View>
-            <Text>Que outcome</Text>
-        </View>
-    );
+    return <CreateOutcome />;
 };
