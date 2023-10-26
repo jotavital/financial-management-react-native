@@ -5,19 +5,18 @@ export const styles = StyleSheet.create({
     container: {
         marginBottom: 6,
     },
-    input: {
+    pickerInput: {
         borderColor: colors.darkGray,
         borderWidth: 0.5,
         borderRadius: 5,
-        padding: 6,
-        height: 43,
         maxHeight: 43,
+        display: 'flex',
+        justifyContent: 'center',
     },
     invalid: {
         borderColor: colors.red,
         borderWidth: 0.7,
         borderRadius: 5,
-        padding: 6,
     },
     errors: {
         color: colors.red,

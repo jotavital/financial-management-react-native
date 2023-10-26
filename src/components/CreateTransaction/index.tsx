@@ -1,25 +1,28 @@
 import { useForm } from 'react-hook-form';
 import { Button, View, ToastAndroid } from 'react-native';
 import { InferType } from 'yup';
-import { styles } from '~/components/CreateIncome/styles';
+import { createTransactionSchema } from '~/components/CreateTransaction/schema';
+import { styles } from '~/components/CreateTransaction/styles';
 import { TextField } from '~/components/Form/TextField';
 import { colors } from '~/styles/colors';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { DateTimePicker } from '~/components/Form/DateTimePicker';
-import { createOutcomeSchema } from '~/components/CreateOutcome/schema';
+import { Picker } from '~/components/Form/Picker';
 
-export const CreateOutcome: React.FC = () => {
+export const CreateTransaction: React.FC = () => {
     const {
         handleSubmit,
         control,
         reset,
         formState: { errors },
         setValue,
-    } = useForm<InferType<typeof createOutcomeSchema>>({
-        resolver: yupResolver(createOutcomeSchema),
+        trigger,
+    } = useForm<InferType<typeof createTransactionSchema>>({
+        resolver: yupResolver(createTransactionSchema),
     });
 
     const onSubmit = (data: any /* TODO: tipar*/) => {
+        console.log(data);
         reset();
         ToastAndroid.show('Dados salvos com sucesso.', ToastAndroid.SHORT);
     };
@@ -48,6 +51,18 @@ export const CreateOutcome: React.FC = () => {
                 control={control}
                 errors={errors.date}
                 setValue={setValue}
+                trigger={trigger}
+            />
+            <Picker
+                name='type'
+                label='Tipo'
+                setValue={setValue}
+                errors={errors.type}
+                items={[
+                    { label: 'Receita', value: 'income' },
+                    { label: 'Despesa', value: 'outcome' },
+                ]}
+                trigger={trigger}
             />
 
             <Button

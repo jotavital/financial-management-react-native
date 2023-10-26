@@ -11,6 +11,7 @@ import {
     Merge,
     UseControllerProps,
     UseFormSetValue,
+    UseFormTrigger,
 } from 'react-hook-form';
 import { TextInputProps } from 'react-native';
 import { TextField } from '~/components/Form/TextField';
@@ -19,6 +20,7 @@ interface Props {
     label: string;
     errors: FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
     setValue: UseFormSetValue<FieldValues>;
+    trigger: UseFormTrigger<FieldValues>;
     [x: string]: any;
 }
 
@@ -28,10 +30,13 @@ export const DateTimePicker = ({
     control,
     errors,
     setValue,
+    trigger,
     ...rest
 }: UseControllerProps<FieldValues> & Props & TextInputProps) => {
     const setDate = (event: DateTimePickerEvent, date: Date) => {
         setValue(name, moment(date).format('DD/MM/YYYY'));
+
+        trigger(name);
     };
 
     const handleOpenPicker = () => {

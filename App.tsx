@@ -4,11 +4,11 @@ import { StyleSheet, View } from 'react-native';
 import { Navbar } from '~/components/Navbar';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { DashboardScreen } from '~/screens/Dashboard';
-import { CreateIncomeScreen } from '~/screens/CreateIncome';
+import { CreateTransactionScreen } from '~/screens/CreateTransaction';
 import { colors } from '~/styles/colors';
 import { getHeaderTitle } from '@react-navigation/elements';
 import { AntDesign } from '@expo/vector-icons';
-import { CreateOutcomeScreen } from '~/screens/CreateOutcome';
+import { MaterialIcons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
@@ -46,33 +46,18 @@ export default function App() {
                         }}
                     />
                     <Tab.Screen
-                        name='CreateIncome'
-                        component={CreateIncomeScreen}
+                        name='CreateTransaction'
+                        component={CreateTransactionScreen}
                         options={{
-                            tabBarIcon: () => (
-                                <AntDesign
-                                    name='arrowup'
+                            tabBarIcon: ({ color }) => (
+                                <MaterialIcons
+                                    name='compare-arrows'
                                     size={24}
-                                    color={colors.green}
+                                    color={color}
                                 />
                             ),
-                            tabBarLabel: 'Nova Receita',
-                            headerTitle: 'Nova Receita',
-                        }}
-                    />
-                    <Tab.Screen
-                        name='CreateOutcome'
-                        component={CreateOutcomeScreen}
-                        options={{
-                            tabBarIcon: () => (
-                                <AntDesign
-                                    name='arrowdown'
-                                    size={24}
-                                    color={colors.red}
-                                />
-                            ),
-                            tabBarLabel: 'Nova Despesa',
-                            headerTitle: 'Nova Despesa',
+                            tabBarLabel: 'Nova Movimentação',
+                            headerTitle: 'Nova Movimentação',
                         }}
                     />
                     <Tab.Screen

@@ -1,11 +1,8 @@
-import {
-    FormattedTransactionType,
-    TransactionType,
-} from '~/models/Transaction';
+import { ReadableTransactionType, TransactionType } from '~/models/transaction';
 
 export const formatTransactionType = (
     type: TransactionType
-): FormattedTransactionType => {
+): ReadableTransactionType => {
     switch (type) {
         case 'income':
             return 'Receita';

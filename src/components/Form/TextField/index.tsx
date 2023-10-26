@@ -1,5 +1,6 @@
 import { Controller, FieldValues, UseControllerProps } from 'react-hook-form';
 import { Text, TextInput, TextInputProps, View } from 'react-native';
+import { Label } from '~/components/Form/Label';
 import { styles } from '~/components/Form/TextField/styles';
 
 interface Props {
@@ -15,13 +16,10 @@ export const TextField = <FormType extends FieldValues>({
     ...rest
 }: UseControllerProps<FormType> & Props & TextInputProps) => (
     <View style={styles.container}>
-        <Text style={styles.label}>{label}</Text>
+        <Label text={label} />
 
         <Controller
             control={control}
-            rules={{
-                required: !!rest.required,
-            }}
             render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                     style={[styles.input, errors && styles.invalid]}
