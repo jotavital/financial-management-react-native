@@ -4666,6 +4666,7 @@ __metadata:
     react: "npm:18.2.0"
     react-hook-form: "npm:^7.47.0"
     react-native: "npm:0.72.5"
+    react-native-currency-input: "npm:^1.1.1"
     react-native-safe-area-context: "npm:4.6.3"
     react-native-screens: "npm:~3.22.0"
     typescript: "npm:^5.1.3"
@@ -7644,6 +7645,16 @@ __metadata:
   version: 17.0.2
   resolution: "react-is@npm:17.0.2"
   checksum: 2bdb6b93fbb1820b024b496042cce405c57e2f85e777c9aabd55f9b26d145408f9f74f5934676ffdc46f3dcff656d78413a6e43968e7b3f92eea35b3052e9053
+  languageName: node
+  linkType: hard
+
+"react-native-currency-input@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "react-native-currency-input@npm:1.1.1"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: cff78f4a2ccdc2175be262c9d6e8cf1c751053e6130f286f89fe3e82b99d9ef4a48fdde44103d89c4917f403617f8ffcbf51589ffb873176a0f8feb80dc6e2f4
   languageName: node
   linkType: hard
 

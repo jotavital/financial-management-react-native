@@ -8,6 +8,7 @@ import { colors } from '~/styles/colors';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { DateTimePicker } from '~/components/Form/DateTimePicker';
 import { Picker } from '~/components/Form/Picker';
+import { CurrencyField } from '~/components/Form/CurrencyField';
 
 export const CreateTransaction: React.FC = () => {
     const {
@@ -36,13 +37,13 @@ export const CreateTransaction: React.FC = () => {
                 control={control}
                 errors={errors.title}
             />
-            <TextField
+            <CurrencyField
                 name='amount'
                 label='Valor'
                 placeholder='Valor'
-                control={control}
-                keyboardType='numeric'
                 errors={errors.amount}
+                setValue={setValue}
+                trigger={trigger}
             />
             <DateTimePicker
                 name='date'
