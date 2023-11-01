@@ -1,4 +1,9 @@
-import { FieldValues, UseFormSetValue, UseFormTrigger } from 'react-hook-form';
+import {
+    FieldValues,
+    UseFormSetValue,
+    UseFormTrigger,
+    UseFormWatch,
+} from 'react-hook-form';
 
 interface PickerItem {
     label: string;
@@ -12,4 +17,5 @@ export interface PickerProps {
     errors: any;
     items?: PickerItem[];
     trigger: UseFormTrigger<FieldValues>;
+    watch: UseFormWatch<FieldValues>;
 }

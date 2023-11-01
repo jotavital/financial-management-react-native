@@ -2,7 +2,6 @@ import { Text, View } from 'react-native';
 import { Picker as PickerLibrary } from '@react-native-picker/picker';
 import { Label } from '~/components/Form/Label';
 import { styles } from '~/components/Form/Picker/styles';
-import { useState } from 'react';
 import { PickerProps } from '~/components/Form/Picker/types';
 
 export const Picker: React.FC<PickerProps> = ({
@@ -11,14 +10,11 @@ export const Picker: React.FC<PickerProps> = ({
     errors,
     setValue,
     trigger,
+    watch,
     items,
 }) => {
-    const [selectedValue, setSelectedValue] = useState<unknown>();
-
     const handleSetValue = (value: unknown) => {
-        setSelectedValue(value);
         setValue(name, value);
-
         trigger(name);
     };
 
@@ -29,7 +25,7 @@ export const Picker: React.FC<PickerProps> = ({
                 <PickerLibrary
                     mode='dropdown'
                     onValueChange={(value) => handleSetValue(value)}
-                    selectedValue={selectedValue}
+                    selectedValue={watch(name)}
                 >
                     <PickerLibrary.Item label='Selecione um item' value='' />
                     {items &&

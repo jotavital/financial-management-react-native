@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
     FieldValues,
     UseControllerProps,
@@ -22,13 +21,11 @@ export const CurrencyField = <FormType extends FieldValues>({
     errors,
     setValue,
     trigger,
+    watch,
     ...rest
 }: UseControllerProps<FormType> & Props & TextInputProps) => {
-    const [internalValue, setInternalValue] = useState<number>(null);
-
     const handleChangeValue = (value: number) => {
         setValue(name, value);
-        setInternalValue(value);
         trigger(name);
     };
 
@@ -38,8 +35,7 @@ export const CurrencyField = <FormType extends FieldValues>({
 
             <CurrencyInput
                 style={[styles.input, errors && styles.invalid]}
-                /* @ts-ignore because of value prop */
-                value={internalValue}
+                value={watch(name)}
                 onChangeValue={handleChangeValue}
                 prefix='R$ '
                 {...rest}

@@ -18,6 +18,7 @@ export const CreateTransaction: React.FC = () => {
         formState: { errors },
         setValue,
         trigger,
+        watch,
     } = useForm<InferType<typeof createTransactionSchema>>({
         resolver: yupResolver(createTransactionSchema),
     });
@@ -44,6 +45,7 @@ export const CreateTransaction: React.FC = () => {
                 errors={errors.amount}
                 setValue={setValue}
                 trigger={trigger}
+                watch={watch}
             />
             <DateTimePicker
                 name='date'
@@ -64,6 +66,7 @@ export const CreateTransaction: React.FC = () => {
                     { label: 'Despesa', value: 'outcome' },
                 ]}
                 trigger={trigger}
+                watch={watch}
             />
 
             <Button
