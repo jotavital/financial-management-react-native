@@ -7,6 +7,8 @@ import { Table } from '~/components/Table';
 import { TableColumns } from '~/components/Table/types';
 import { formatTransactionType } from '~/utils/string';
 import { centsToBrl } from '~/utils/currency';
+import { useEffect } from 'react';
+import api from '~/services/api';
 
 export const Dashboard: React.FC = () => {
     //TODO: colocar em outro arquivo
@@ -58,6 +60,14 @@ export const Dashboard: React.FC = () => {
             date: '23/07/2022 11:45',
         },
     ];
+
+    useEffect(() => {
+        api.get('users')
+            .then(({ data }) => {
+                console.log(data);
+            })
+            .catch((error) => console.error(error));
+    }, []);
 
     return (
         <View style={styles.container}>
