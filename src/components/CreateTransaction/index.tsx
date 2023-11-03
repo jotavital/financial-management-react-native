@@ -9,6 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { DateTimePicker } from '~/components/Form/DateTimePicker';
 import { Picker } from '~/components/Form/Picker';
 import { CurrencyField } from '~/components/Form/CurrencyField';
+import api from '~/services/api';
 
 export const CreateTransaction: React.FC = () => {
     const {
@@ -24,9 +25,21 @@ export const CreateTransaction: React.FC = () => {
     });
 
     const onSubmit = (data: any /* TODO: tipar*/) => {
-        console.log(data);
-        reset();
-        ToastAndroid.show('Dados salvos com sucesso.', ToastAndroid.SHORT);
+        api.post(`users/65446ba0f431cd94e768a0f3/transactions`, data)
+            .then((response) => {
+                reset();
+                ToastAndroid.show(
+                    'Dados salvos com sucesso.',
+                    ToastAndroid.SHORT
+                );
+            })
+            .catch((error) => {
+                console.error(error);
+                ToastAndroid.show(
+                    'Ocorreu um erro ao salvar os dados.',
+                    ToastAndroid.SHORT
+                );
+            });
     };
 
     return (
