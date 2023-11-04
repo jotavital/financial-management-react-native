@@ -4684,7 +4684,7 @@ __metadata:
     prettier: "npm:^3.0.3"
     react: "npm:18.2.0"
     react-hook-form: "npm:^7.47.0"
-    react-native: "npm:0.72.5"
+    react-native: "npm:0.72.6"
     react-native-currency-input: "npm:^1.1.1"
     react-native-dotenv: "npm:^3.4.9"
     react-native-safe-area-context: "npm:4.6.3"
@@ -7740,9 +7740,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native@npm:0.72.5":
-  version: 0.72.5
-  resolution: "react-native@npm:0.72.5"
+"react-native@npm:0.72.6":
+  version: 0.72.6
+  resolution: "react-native@npm:0.72.6"
   dependencies:
     "@jest/create-cache-key-function": "npm:^29.2.1"
     "@react-native-community/cli": "npm:11.3.7"
@@ -7784,7 +7784,7 @@ __metadata:
     react: 18.2.0
   bin:
     react-native: cli.js
-  checksum: ab7775d7d7bd0a119f3f13f77acc534e927f6ec80050760f648f0887346b32dd51730c939c08019935fc9ee6716f5efc572df4f9a404e5da79741edb3c5dae47
+  checksum: 1e2e04fd7d68deca567034df409cf9dbfc38677f6eb0b6316c9fe6a10832b788bbe8f709e361b1434b3e7dbe2fd214998ecb4244cb248ab05cda081a5d6da46c
   languageName: node
   linkType: hard
 

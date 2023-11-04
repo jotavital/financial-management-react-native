@@ -25,21 +25,15 @@ export const CreateTransaction: React.FC = () => {
     });
 
     const onSubmit = (data: any /* TODO: tipar*/) => {
-        api.post(`users/65446ba0f431cd94e768a0f3/transactions`, data)
-            .then((response) => {
+        api.post(`users/65446ba0f431cd94e768a0f3/transactions`, data).then(
+            (response) => {
                 reset();
                 ToastAndroid.show(
                     'Dados salvos com sucesso.',
                     ToastAndroid.SHORT
                 );
-            })
-            .catch((error) => {
-                console.error(error);
-                ToastAndroid.show(
-                    'Ocorreu um erro ao salvar os dados.',
-                    ToastAndroid.SHORT
-                );
-            });
+            }
+        );
     };
 
     return (

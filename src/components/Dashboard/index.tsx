@@ -1,4 +1,4 @@
-import { ActivityIndicator, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, ScrollView, Text } from 'react-native';
 import styles from '~/components/Dashboard/styles';
 import { Card } from '~/components/Dashboard/Card';
 import { AntDesign } from '@expo/vector-icons';
