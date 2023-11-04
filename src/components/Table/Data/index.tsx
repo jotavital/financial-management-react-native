@@ -1,13 +1,23 @@
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import styles from '~/components/Table/Data/styles';
 import { TableColumns } from '~/components/Table/types';
 
 interface Props {
-    data: any; //TODO: tipar
+    data: any[];
     columns: TableColumns;
 }
 
 export const Data: React.FC<Props> = ({ data, columns }) => {
+    if (!data || !data?.length) {
+        return (
+            <View style={[styles.row, styles.empty]}>
+                <Text style={styles.emptyText}>
+                    Nenhum registro encontrado.
+                </Text>
+            </View>
+        );
+    }
+
     return (
         <>
             {data?.map((item, rowIndex) => {

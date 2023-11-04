@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { ActivityIndicator, Text, View } from 'react-native';
 import styles from '~/components/Dashboard/styles';
 import { Card } from '~/components/Dashboard/Card';
 import { AntDesign } from '@expo/vector-icons';
@@ -7,8 +7,13 @@ import { Table } from '~/components/Table';
 import { TableColumns } from '~/components/Table/types';
 import { formatTransactionType } from '~/utils/string';
 import { centsToBrl } from '~/utils/currency';
+import { useEffect, useState } from 'react';
+import api from '~/services/api';
 
 export const Dashboard: React.FC = () => {
+    const [data, setData] = useState<any>([]);
+    const [isLoadingData, setIsLoadingData] = useState<boolean>(false);
+
     //TODO: colocar em outro arquivo
     const columns: TableColumns = [
         {
@@ -31,33 +36,16 @@ export const Dashboard: React.FC = () => {
         },
     ];
 
-    // TODO: tipar
-    const data: any = [
-        {
-            id: 1,
-            type: 'income',
-            amount: '501',
-            date: '23/07/2022 11:45',
-        },
-        {
-            id: 2,
-            type: 'income',
-            amount: '3599',
-            date: '23/07/2022 11:45',
-        },
-        {
-            id: 3,
-            type: 'outcome',
-            amount: '125000',
-            date: '23/07/2022 11:45',
-        },
-        {
-            id: 4,
-            type: 'outcome',
-            amount: '1250099',
-            date: '23/07/2022 11:45',
-        },
-    ];
+    useEffect(() => {
+        setIsLoadingData(true);
+
+        api.get('users/65446ba0f431cd94e768a0f3/transactions').then(
+            ({ data }) => {
+                setIsLoadingData(false);
+                setData(data);
+            }
+        );
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -77,9 +65,11 @@ export const Dashboard: React.FC = () => {
                     <AntDesign name='arrowdown' size={40} color={colors.red} />
                 }
             />
-            <View>
+            {isLoadingData ? (
+                <ActivityIndicator size='large' color={colors.blue} />
+            ) : (
                 <Table columns={columns} data={data} />
-            </View>
+            )}
         </View>
     );
 };

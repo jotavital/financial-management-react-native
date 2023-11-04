@@ -21,6 +21,14 @@ const styles = StyleSheet.create({
         borderBottomColor: colors.darkGray,
         borderBottomWidth: 0.5,
     },
+    empty: {
+        padding: 10,
+        justifyContent: 'center',
+    },
+    emptyText: {
+        fontSize: 15,
+        fontWeight: 'bold',
+    },
 });
 
 export default styles;
