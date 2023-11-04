@@ -1,4 +1,4 @@
-import { ActivityIndicator, Text, View } from 'react-native';
+import { ActivityIndicator, ScrollView, Text, View } from 'react-native';
 import styles from '~/components/Dashboard/styles';
 import { Card } from '~/components/Dashboard/Card';
 import { AntDesign } from '@expo/vector-icons';
@@ -48,7 +48,7 @@ export const Dashboard: React.FC = () => {
     }, []);
 
     return (
-        <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.contentContainer}>
             <Card
                 title='Receitas'
                 text='R$ 4.500,00'
@@ -70,6 +70,6 @@ export const Dashboard: React.FC = () => {
             ) : (
                 <Table columns={columns} data={data} />
             )}
-        </View>
+        </ScrollView>
     );
 };
