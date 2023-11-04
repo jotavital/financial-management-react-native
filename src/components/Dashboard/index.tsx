@@ -1,4 +1,9 @@
-import { ActivityIndicator, ScrollView, Text } from 'react-native';
+import {
+    ActivityIndicator,
+    RefreshControl,
+    ScrollView,
+    Text,
+} from 'react-native';
 import styles from '~/components/Dashboard/styles';
 import { Card } from '~/components/Dashboard/Card';
 import { AntDesign } from '@expo/vector-icons';
@@ -7,7 +12,7 @@ import { Table } from '~/components/Table';
 import { TableColumns } from '~/components/Table/types';
 import { formatTransactionType } from '~/utils/string';
 import { centsToBrl } from '~/utils/currency';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import api from '~/services/api';
 
 export const Dashboard: React.FC = () => {
@@ -37,6 +42,10 @@ export const Dashboard: React.FC = () => {
     ];
 
     useEffect(() => {
+        handleFetchTransactions();
+    }, []);
+
+    const handleFetchTransactions = useCallback(() => {
         setIsLoadingData(true);
 
         api.get('users/65446ba0f431cd94e768a0f3/transactions').then(
@@ -48,7 +57,15 @@ export const Dashboard: React.FC = () => {
     }, []);
 
     return (
-        <ScrollView contentContainerStyle={styles.contentContainer}>
+        <ScrollView
+            contentContainerStyle={styles.contentContainer}
+            refreshControl={
+                <RefreshControl
+                    refreshing={isLoadingData}
+                    onRefresh={handleFetchTransactions}
+                />
+            }
+        >
             <Card
                 title='Receitas'
                 text='R$ 4.500,00'
