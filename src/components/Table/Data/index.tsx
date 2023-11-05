@@ -1,13 +1,14 @@
+import { ReactElement } from 'react';
 import { Text, View } from 'react-native';
 import styles from '~/components/Table/Data/styles';
 import { TableColumns } from '~/components/Table/types';
 
-interface Props {
+interface Props<T> {
     data: any[];
-    columns: TableColumns;
+    columns: TableColumns<T>;
 }
 
-export const Data: React.FC<Props> = ({ data, columns }) => {
+export const Data = <T,>({ data, columns }: Props<T>): ReactElement => {
     if (!data || !data?.length) {
         return (
             <View style={[styles.row, styles.empty]}>

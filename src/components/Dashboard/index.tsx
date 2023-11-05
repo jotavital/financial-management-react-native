@@ -14,13 +14,13 @@ import { formatTransactionType } from '~/utils/string';
 import { centsToBrl } from '~/utils/currency';
 import { useCallback, useEffect, useState } from 'react';
 import api from '~/services/api';
+import { TransactionProps } from '~/models/transaction';
 
 export const Dashboard: React.FC = () => {
-    const [data, setData] = useState<any[]>(null);
+    const [transactions, setTransactions] = useState<TransactionProps[]>(null);
     const [isLoadingData, setIsLoadingData] = useState<boolean>(false);
 
-    //TODO: colocar em outro arquivo
-    const columns: TableColumns = [
+    const columns: TableColumns<TransactionProps> = [
         {
             title: 'Título',
             render: (item) => {
@@ -53,11 +53,11 @@ export const Dashboard: React.FC = () => {
         api.get('users/65446ba0f431cd94e768a0f3/transactions')
             .then(({ data }) => {
                 setIsLoadingData(false);
-                setData(data);
+                setTransactions(data);
             })
             .catch((error) => {
                 setIsLoadingData(false);
-                setData(null);
+                setTransactions(null);
             });
     }, []);
 
@@ -94,7 +94,7 @@ export const Dashboard: React.FC = () => {
             {isLoadingData ? (
                 <ActivityIndicator size='large' color={colors.blue} />
             ) : (
-                <Table columns={columns} data={data} />
+                <Table columns={columns} data={transactions} />
             )}
         </ScrollView>
     );

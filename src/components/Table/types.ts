@@ -1,13 +1,13 @@
 import { ReactElement } from 'react';
 
-interface TableColumn {
+interface TableColumn<T> {
     title: string;
-    render: (item: any) => ReactElement;
+    render: (item: T) => ReactElement;
 }
 
-export type TableColumns = TableColumn[];
+export type TableColumns<T> = TableColumn<T>[];
 
 export interface TableProps {
-    columns: TableColumns;
-    data: any; //TODO: tipar
+    columns: TableColumns<any>;
+    data: any;
 }
