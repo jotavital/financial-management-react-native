@@ -10,11 +10,10 @@ import { AntDesign } from '@expo/vector-icons';
 import { colors } from '~/styles/colors';
 import { Table } from '~/components/Table';
 import { TableColumns } from '~/components/Table/types';
-import { formatTransactionType } from '~/utils/string';
-import { centsToBrl } from '~/utils/currency';
 import { useCallback, useEffect, useState } from 'react';
 import api from '~/services/api';
 import { TransactionProps } from '~/models/transaction';
+import { FormattedAmount } from '~/components/Common/FormattedAmount';
 
 export const Dashboard: React.FC = () => {
     const [transactions, setTransactions] = useState<TransactionProps[]>(null);
@@ -28,15 +27,11 @@ export const Dashboard: React.FC = () => {
             },
         },
         {
-            title: 'Tipo',
-            render: (item) => {
-                return <Text>{formatTransactionType(item?.type)}</Text>;
-            },
-        },
-        {
             title: 'Valor',
             render: (item) => {
-                return <Text>{centsToBrl(item?.amount)}</Text>;
+                return (
+                    <FormattedAmount amount={item?.amount} type={item?.type} />
+                );
             },
         },
         {
@@ -50,12 +45,14 @@ export const Dashboard: React.FC = () => {
     const handleFetchTransactions = useCallback(() => {
         setIsLoadingData(true);
 
-        api.get('users/65446ba0f431cd94e768a0f3/transactions')
+        api.get<TransactionProps[]>(
+            'users/65446ba0f431cd94e768a0f3/transactions'
+        )
             .then(({ data }) => {
                 setIsLoadingData(false);
                 setTransactions(data);
             })
-            .catch((error) => {
+            .catch(() => {
                 setIsLoadingData(false);
                 setTransactions(null);
             });

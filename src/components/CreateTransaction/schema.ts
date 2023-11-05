@@ -1,9 +1,12 @@
-import { TransactionType } from '~/models/transaction';
+import { TransactionType, TransactionTypeEnum } from '~/models/transaction';
 import { object, string } from 'yup';
 import { momentDate } from '~/schemas/date';
 import { genericValidation } from '~/utils/validation';
 
-const transactionTypes: TransactionType[] = ['income', 'outcome'];
+const transactionTypes: TransactionType[] = [
+    TransactionTypeEnum.Income,
+    TransactionTypeEnum.Outcome,
+];
 
 export const createTransactionSchema = object({
     title: string().required(genericValidation.required),

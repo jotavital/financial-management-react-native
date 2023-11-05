@@ -1,12 +1,13 @@
+import { ReactElement } from 'react';
 import { Text, View } from 'react-native';
 import styles from '~/components/Table/Header/styles';
 import { TableColumns } from '~/components/Table/types';
 
-interface Props {
-    columns: TableColumns;
+interface Props<T> {
+    columns: TableColumns<T>;
 }
 
-export const Header: React.FC<Props> = ({ columns }) => {
+export const Header = <T,>({ columns }: Props<T>): ReactElement => {
     return (
         <View style={styles.headerContainer}>
             {columns?.map((item, index) => {
@@ -18,7 +19,7 @@ export const Header: React.FC<Props> = ({ columns }) => {
                         key={index}
                         style={[styles.headerCell, borderRightStyle]}
                     >
-                        <Text>{item?.title}</Text>
+                        <Text style={styles.headerText}>{item?.title}</Text>
                     </View>
                 );
             })}

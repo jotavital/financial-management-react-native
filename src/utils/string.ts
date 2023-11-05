@@ -1,12 +1,16 @@
-import { ReadableTransactionType, TransactionType } from '~/models/transaction';
+import {
+    ReadableTransactionType,
+    TransactionType,
+    TransactionTypeEnum,
+} from '~/models/transaction';
 
 export const formatTransactionType = (
     type: TransactionType
 ): ReadableTransactionType => {
     switch (type) {
-        case 'income':
+        case TransactionTypeEnum.Income:
             return 'Receita';
-        case 'outcome':
+        case TransactionTypeEnum.Outcome:
             return 'Despesa';
         default:
             break;

@@ -1,5 +1,10 @@
 export type TransactionType = 'income' | 'outcome';
 
+export enum TransactionTypeEnum {
+    Income = 'income',
+    Outcome = 'outcome',
+}
+
 export type ReadableTransactionType = 'Receita' | 'Despesa';
 
 export interface TransactionProps {

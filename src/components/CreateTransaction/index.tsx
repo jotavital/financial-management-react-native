@@ -10,6 +10,7 @@ import { DateTimePicker } from '~/components/Form/DateTimePicker';
 import { Picker } from '~/components/Form/Picker';
 import { CurrencyField } from '~/components/Form/CurrencyField';
 import api from '~/services/api';
+import { TransactionTypeEnum } from '~/models/transaction';
 
 export const CreateTransaction: React.FC = () => {
     const {
@@ -69,8 +70,8 @@ export const CreateTransaction: React.FC = () => {
                 setValue={setValue}
                 errors={errors.type}
                 items={[
-                    { label: 'Receita', value: 'income' },
-                    { label: 'Despesa', value: 'outcome' },
+                    { label: 'Receita', value: TransactionTypeEnum.Income },
+                    { label: 'Despesa', value: TransactionTypeEnum.Outcome },
                 ]}
                 trigger={trigger}
                 watch={watch}

@@ -21,6 +21,9 @@ const styles = StyleSheet.create({
         borderBottomColor: colors.darkGray,
         borderBottomWidth: 0.5,
     },
+    headerText: {
+        fontWeight: 'bold',
+    },
     borderRight: {
         borderRightColor: colors.darkGray,
         borderRightWidth: 0.5,
