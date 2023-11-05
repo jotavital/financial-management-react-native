@@ -16,11 +16,17 @@ import { useCallback, useEffect, useState } from 'react';
 import api from '~/services/api';
 
 export const Dashboard: React.FC = () => {
-    const [data, setData] = useState<any>([]);
+    const [data, setData] = useState<any[]>(null);
     const [isLoadingData, setIsLoadingData] = useState<boolean>(false);
 
     //TODO: colocar em outro arquivo
     const columns: TableColumns = [
+        {
+            title: 'Título',
+            render: (item) => {
+                return <Text>{item?.title}</Text>;
+            },
+        },
         {
             title: 'Tipo',
             render: (item) => {
@@ -41,19 +47,22 @@ export const Dashboard: React.FC = () => {
         },
     ];
 
-    useEffect(() => {
-        handleFetchTransactions();
-    }, []);
-
     const handleFetchTransactions = useCallback(() => {
         setIsLoadingData(true);
 
-        api.get('users/65446ba0f431cd94e768a0f3/transactions').then(
-            ({ data }) => {
+        api.get('users/65446ba0f431cd94e768a0f3/transactions')
+            .then(({ data }) => {
                 setIsLoadingData(false);
                 setData(data);
-            }
-        );
+            })
+            .catch((error) => {
+                setIsLoadingData(false);
+                setData(null);
+            });
+    }, []);
+
+    useEffect(() => {
+        handleFetchTransactions();
     }, []);
 
     return (
