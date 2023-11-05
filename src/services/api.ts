@@ -1,9 +1,8 @@
 import axios from 'axios';
-import { API_URL } from '@env';
 import { ToastAndroid } from 'react-native';
 
 const api = axios.create({
-    baseURL: API_URL,
+    baseURL: process.env.EXPO_PUBLIC_API_URL,
 });
 
 api.interceptors.response.use(

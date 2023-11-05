@@ -14,3 +14,8 @@ export interface TransactionProps {
     date: string;
     type: TransactionType;
 }
+
+export interface TransactionsTotalsProps {
+    incomesAmount: number;
+    outcomesAmount: number;
+}

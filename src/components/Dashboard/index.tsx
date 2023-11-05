@@ -12,12 +12,18 @@ import { Table } from '~/components/Table';
 import { TableColumns } from '~/components/Table/types';
 import { useCallback, useEffect, useState } from 'react';
 import api from '~/services/api';
-import { TransactionProps } from '~/models/transaction';
+import {
+    TransactionProps,
+    TransactionsTotalsProps,
+} from '~/models/transaction';
 import { FormattedAmount } from '~/components/Common/FormattedAmount';
+import { toBrl } from '~/utils/currency';
 
 export const Dashboard: React.FC = () => {
     const [transactions, setTransactions] = useState<TransactionProps[]>(null);
     const [isLoadingData, setIsLoadingData] = useState<boolean>(false);
+    const [isLoadingTotals, setIsLoadingTotals] = useState<boolean>(false);
+    const [totals, setTotals] = useState<TransactionsTotalsProps>(null);
 
     const columns: TableColumns<TransactionProps> = [
         {
@@ -42,6 +48,23 @@ export const Dashboard: React.FC = () => {
         },
     ];
 
+    // TODO: colocar num context
+    const handleFetchTotals = useCallback(() => {
+        setIsLoadingTotals(true);
+
+        api.get<TransactionsTotalsProps>(
+            'users/65446ba0f431cd94e768a0f3/transactions/totals'
+        )
+            .then(({ data }) => {
+                setIsLoadingTotals(false);
+                setTotals(data);
+            })
+            .catch(() => {
+                setIsLoadingTotals(false);
+                setTotals(null);
+            });
+    }, []);
+
     const handleFetchTransactions = useCallback(() => {
         setIsLoadingData(true);
 
@@ -58,8 +81,13 @@ export const Dashboard: React.FC = () => {
             });
     }, []);
 
-    useEffect(() => {
+    const handleFetchDashboard = useCallback(() => {
+        handleFetchTotals();
         handleFetchTransactions();
+    }, []);
+
+    useEffect(() => {
+        handleFetchDashboard();
     }, []);
 
     return (
@@ -68,25 +96,27 @@ export const Dashboard: React.FC = () => {
             refreshControl={
                 <RefreshControl
                     refreshing={isLoadingData}
-                    onRefresh={handleFetchTransactions}
+                    onRefresh={handleFetchDashboard}
                 />
             }
         >
             <Card
                 title='Receitas'
-                text='R$ 4.500,00'
+                text={toBrl(totals?.incomesAmount)}
                 color='green'
                 icon={
                     <AntDesign name='arrowup' size={40} color={colors.green} />
                 }
+                isLoading={isLoadingTotals}
             />
             <Card
                 title='Despesas'
-                text='R$ 500,00'
+                text={toBrl(totals?.outcomesAmount)}
                 color='red'
                 icon={
                     <AntDesign name='arrowdown' size={40} color={colors.red} />
                 }
+                isLoading={isLoadingTotals}
             />
             {isLoadingData ? (
                 <ActivityIndicator size='large' color={colors.blue} />

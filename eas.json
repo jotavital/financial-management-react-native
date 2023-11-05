@@ -3,15 +3,10 @@
         "preview": {
             "android": {
                 "buildType": "apk"
+            },
+            "env": {
+                "EXPO_PUBLIC_API_URL": "http://192.168.1.107:9090/api/"
             }
-        },
-        "preview2": {
-            "android": {
-                "gradleCommand": ":app:assembleRelease"
-            }
-        },
-        "preview3": {
-            "developmentClient": true
         },
         "production": {}
     }

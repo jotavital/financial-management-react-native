@@ -32,8 +32,7 @@
     "devDependencies": {
         "@babel/core": "^7.20.0",
         "babel-plugin-module-resolver": "^5.0.0",
-        "prettier": "^3.0.3",
-        "react-native-dotenv": "^3.4.9"
+        "prettier": "^3.0.3"
     },
     "private": true,
     "packageManager": "yarn@4.0.0",
