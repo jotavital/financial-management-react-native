@@ -1,6 +1,14 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Button, ToastAndroid, View } from 'react-native';
+import {
+    ActivityIndicator,
+    Alert,
+    Button,
+    ToastAndroid,
+    View,
+} from 'react-native';
 import { InferType } from 'yup';
 import { createTransactionSchema } from '~/components/CreateTransaction/schema';
 import { styles } from '~/components/CreateTransaction/styles';
@@ -8,11 +16,18 @@ import { CurrencyField } from '~/components/Form/CurrencyField';
 import { DateTimePicker } from '~/components/Form/DateTimePicker';
 import { Picker } from '~/components/Form/Picker';
 import { TextField } from '~/components/Form/TextField';
-import { TransactionTypeEnum } from '~/models/transaction';
+import { TransactionProps, TransactionTypeEnum } from '~/models/transaction';
 import api from '~/services/api';
 import { colors } from '~/styles/colors';
 
-export const CreateTransaction: React.FC = () => {
+interface Props {
+    transaction: TransactionProps;
+}
+
+export const CreateTransaction: React.FC<Props> = ({ transaction }: Props) => {
+    const navigation = useNavigation();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
     const {
         handleSubmit,
         control,
@@ -37,14 +52,40 @@ export const CreateTransaction: React.FC = () => {
         );
     };
 
+    const handleConfirmDelete = (transactionId: string) => {
+        Alert.alert('Tem certeza?', 'Deseja mesmo deletar esta movimentação?', [
+            {
+                text: 'Voltar',
+                style: 'cancel',
+            },
+            { text: 'Excluir', onPress: () => handleDelete(transactionId) },
+        ]);
+    };
+
+    const handleDelete = (transactionId: string) => {
+        setIsLoading(true);
+        api.delete(
+            `users/65446ba0f431cd94e768a0f3/transactions/${transactionId}`
+        )
+            .then((response) => {
+                if (response) {
+                    // @ts-ignore
+                    navigation.goBack();
+                }
+            })
+            .finally(() => setIsLoading(false));
+    };
+
     return (
         <View style={styles.container}>
+            {/* TODO: melhorar visual dos campos disabled */}
             <TextField
                 name='title'
                 label='Título'
                 placeholder='Título'
                 control={control}
                 errors={errors.title}
+                editable={!isLoading}
             />
             <CurrencyField
                 name='amount'
@@ -54,6 +95,7 @@ export const CreateTransaction: React.FC = () => {
                 setValue={setValue}
                 trigger={trigger}
                 watch={watch}
+                editable={!isLoading}
             />
             <DateTimePicker
                 name='date'
@@ -63,6 +105,7 @@ export const CreateTransaction: React.FC = () => {
                 errors={errors.date}
                 setValue={setValue}
                 trigger={trigger}
+                editable={!isLoading}
             />
             <Picker
                 name='type'
@@ -75,13 +118,29 @@ export const CreateTransaction: React.FC = () => {
                 ]}
                 trigger={trigger}
                 watch={watch}
+                editable={!isLoading}
             />
 
-            <Button
-                onPress={handleSubmit(onSubmit)}
-                title={'Salvar'}
-                color={colors.green}
-            />
+            <View style={styles.buttonContainer}>
+                <Button
+                    onPress={handleSubmit(onSubmit)}
+                    title={'Salvar'}
+                    color={colors.green}
+                    disabled={isLoading}
+                />
+                <Button
+                    onPress={() => handleConfirmDelete(transaction?.id)}
+                    title={'Excluir'}
+                    color={colors.red}
+                    disabled={isLoading}
+                />
+            </View>
+
+            {isLoading && (
+                <View style={styles.loadingContainer}>
+                    <ActivityIndicator size='large' />
+                </View>
+            )}
         </View>
     );
 };

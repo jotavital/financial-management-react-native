@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { GestureResponderEvent, Pressable, Text, View } from 'react-native';
 import styles from '~/components/Table/Data/styles';
 import { TableColumns } from '~/components/Table/types';
 import { colors } from '~/styles/colors';
@@ -7,7 +7,7 @@ import { colors } from '~/styles/colors';
 interface Props<T> {
     data: any[];
     columns: TableColumns<T>;
-    onPress?: () => void;
+    onPress?: (item: any) => void;
 }
 
 export const Data = <T,>({
@@ -32,7 +32,9 @@ export const Data = <T,>({
                     <Pressable
                         key={item?.id}
                         style={styles.row}
-                        onPress={onPress}
+                        onPress={(event: GestureResponderEvent) =>
+                            onPress(item)
+                        }
                         android_ripple={{ color: colors.background }}
                     >
                         {columns?.map((column, index) => {

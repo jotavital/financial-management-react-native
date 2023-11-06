@@ -126,9 +126,10 @@ export const Dashboard: React.FC = () => {
                 <Table
                     columns={columns}
                     data={transactions}
-                    onPress={() =>
-                        navigation.navigate('EditTransaction' as never)
-                    }
+                    onPress={(item: TransactionProps) => {
+                        // @ts-ignore
+                        navigation.navigate('EditTransaction', item);
+                    }}
                 />
             )}
         </ScrollView>

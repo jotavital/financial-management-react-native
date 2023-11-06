@@ -18,4 +18,5 @@ export interface PickerProps {
     items?: PickerItem[];
     trigger: UseFormTrigger<FieldValues>;
     watch: UseFormWatch<FieldValues>;
+    editable: boolean;
 }

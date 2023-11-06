@@ -12,6 +12,7 @@ export const Picker: React.FC<PickerProps> = ({
     trigger,
     watch,
     items,
+    editable,
 }) => {
     const handleSetValue = (value: unknown) => {
         setValue(name, value);
@@ -26,6 +27,7 @@ export const Picker: React.FC<PickerProps> = ({
                     mode='dropdown'
                     onValueChange={(value) => handleSetValue(value)}
                     selectedValue={watch(name)}
+                    enabled={editable}
                 >
                     <PickerLibrary.Item label='Selecione um item' value='' />
                     {items &&
