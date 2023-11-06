@@ -1,16 +1,34 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
-import { Navbar } from '~/components/Navbar';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { DashboardScreen } from '~/screens/Dashboard';
 import { CreateTransactionScreen } from '~/screens/CreateTransaction';
 import { colors } from '~/styles/colors';
-import { getHeaderTitle } from '@react-navigation/elements';
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { EditTransactionScreen } from '~/screens/EditTransaction';
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+
+const DashboardStack = () => {
+    return (
+        <Stack.Navigator screenOptions={{ presentation: 'modal' }}>
+            <Stack.Screen
+                name='DashboardScreen'
+                component={DashboardScreen}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name='EditTransaction'
+                component={EditTransactionScreen}
+                options={{ headerTitle: 'Editar movimentação' }}
+            />
+        </Stack.Navigator>
+    );
+};
 
 export default function App() {
     return (
@@ -22,18 +40,12 @@ export default function App() {
                     screenOptions={{
                         tabBarActiveTintColor: colors.blue,
                         tabBarInactiveTintColor: colors.darkGray,
-                        header: ({ navigation, route, options }) => {
-                            return (
-                                <Navbar
-                                    title={getHeaderTitle(options, route.name)}
-                                />
-                            );
-                        },
+                        headerShown: false,
                     }}
                 >
                     <Tab.Screen
                         name='Dashboard'
-                        component={DashboardScreen}
+                        component={DashboardStack}
                         options={{
                             tabBarIcon: ({ color }) => (
                                 <AntDesign

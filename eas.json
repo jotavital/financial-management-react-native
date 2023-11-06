@@ -5,7 +5,7 @@
                 "buildType": "apk"
             },
             "env": {
-                "EXPO_PUBLIC_API_URL": "http://192.168.1.107:9090/api/"
+                "EXPO_PUBLIC_API_URL": "https://2261-160-238-133-18.ngrok.io/api/"
             }
         },
         "production": {}
