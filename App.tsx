@@ -1,14 +1,13 @@
+import { AntDesign, MaterialIcons } from '@expo/vector-icons';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { DashboardScreen } from '~/screens/Dashboard';
 import { CreateTransactionScreen } from '~/screens/CreateTransaction';
-import { colors } from '~/styles/colors';
-import { AntDesign } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { DashboardScreen } from '~/screens/Dashboard';
 import { EditTransactionScreen } from '~/screens/EditTransaction';
+import { colors } from '~/styles/colors';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
