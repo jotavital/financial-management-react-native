@@ -1,4 +1,3 @@
-import { useNavigation } from '@react-navigation/native';
 import { ReactElement } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import styles from '~/components/Table/Data/styles';
@@ -8,11 +7,14 @@ import { colors } from '~/styles/colors';
 interface Props<T> {
     data: any[];
     columns: TableColumns<T>;
+    onPress?: () => void;
 }
 
-export const Data = <T,>({ data, columns }: Props<T>): ReactElement => {
-    const navigation = useNavigation();
-
+export const Data = <T,>({
+    data,
+    columns,
+    onPress,
+}: Props<T>): ReactElement => {
     if (!data || !data?.length) {
         return (
             <View style={[styles.row, styles.empty]}>
@@ -30,9 +32,7 @@ export const Data = <T,>({ data, columns }: Props<T>): ReactElement => {
                     <Pressable
                         key={item?.id}
                         style={styles.row}
-                        onPress={() =>
-                            navigation.navigate('EditTransaction' as never)
-                        }
+                        onPress={onPress}
                         android_ripple={{ color: colors.background }}
                     >
                         {columns?.map((column, index) => {

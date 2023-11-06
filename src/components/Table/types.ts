@@ -10,4 +10,5 @@ export type TableColumns<T> = TableColumn<T>[];
 export interface TableProps {
     columns: TableColumns<any>;
     data: any;
+    onPress?: () => void;
 }

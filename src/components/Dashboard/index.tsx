@@ -18,12 +18,14 @@ import {
 } from '~/models/transaction';
 import { FormattedAmount } from '~/components/Common/FormattedAmount';
 import { toBrl } from '~/utils/currency';
+import { useNavigation } from '@react-navigation/native';
 
 export const Dashboard: React.FC = () => {
     const [transactions, setTransactions] = useState<TransactionProps[]>(null);
     const [isLoadingData, setIsLoadingData] = useState<boolean>(false);
     const [isLoadingTotals, setIsLoadingTotals] = useState<boolean>(false);
     const [totals, setTotals] = useState<TransactionsTotalsProps>(null);
+    const navigation = useNavigation();
 
     const columns: TableColumns<TransactionProps> = [
         {
@@ -121,7 +123,13 @@ export const Dashboard: React.FC = () => {
             {isLoadingData ? (
                 <ActivityIndicator size='large' color={colors.blue} />
             ) : (
-                <Table columns={columns} data={transactions} />
+                <Table
+                    columns={columns}
+                    data={transactions}
+                    onPress={() =>
+                        navigation.navigate('EditTransaction' as never)
+                    }
+                />
             )}
         </ScrollView>
     );
