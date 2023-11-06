@@ -14,4 +14,4 @@ const colorStyles = {
     green: { color: colors.green },
 };
 
-export { colors, colorStyles };
+export { colorStyles, colors };

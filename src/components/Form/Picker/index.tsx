@@ -1,5 +1,5 @@
-import { Text, View } from 'react-native';
 import { Picker as PickerLibrary } from '@react-native-picker/picker';
+import { Text, View } from 'react-native';
 import { Label } from '~/components/Form/Label';
 import { styles } from '~/components/Form/Picker/styles';
 import { PickerProps } from '~/components/Form/Picker/types';

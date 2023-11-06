@@ -1,16 +1,16 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { Button, View, ToastAndroid } from 'react-native';
+import { Button, ToastAndroid, View } from 'react-native';
 import { InferType } from 'yup';
 import { createTransactionSchema } from '~/components/CreateTransaction/schema';
 import { styles } from '~/components/CreateTransaction/styles';
-import { TextField } from '~/components/Form/TextField';
-import { colors } from '~/styles/colors';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { CurrencyField } from '~/components/Form/CurrencyField';
 import { DateTimePicker } from '~/components/Form/DateTimePicker';
 import { Picker } from '~/components/Form/Picker';
-import { CurrencyField } from '~/components/Form/CurrencyField';
-import api from '~/services/api';
+import { TextField } from '~/components/Form/TextField';
 import { TransactionTypeEnum } from '~/models/transaction';
+import api from '~/services/api';
+import { colors } from '~/styles/colors';
 
 export const CreateTransaction: React.FC = () => {
     const {

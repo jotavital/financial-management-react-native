@@ -1,24 +1,24 @@
+import { AntDesign } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import { useCallback, useEffect, useState } from 'react';
 import {
     ActivityIndicator,
     RefreshControl,
     ScrollView,
     Text,
 } from 'react-native';
-import styles from '~/components/Dashboard/styles';
+import { FormattedAmount } from '~/components/Common/FormattedAmount';
 import { Card } from '~/components/Dashboard/Card';
-import { AntDesign } from '@expo/vector-icons';
-import { colors } from '~/styles/colors';
+import styles from '~/components/Dashboard/styles';
 import { Table } from '~/components/Table';
 import { TableColumns } from '~/components/Table/types';
-import { useCallback, useEffect, useState } from 'react';
-import api from '~/services/api';
 import {
     TransactionProps,
     TransactionsTotalsProps,
 } from '~/models/transaction';
-import { FormattedAmount } from '~/components/Common/FormattedAmount';
+import api from '~/services/api';
+import { colors } from '~/styles/colors';
 import { toBrl } from '~/utils/currency';
-import { useNavigation } from '@react-navigation/native';
 
 export const Dashboard: React.FC = () => {
     const [transactions, setTransactions] = useState<TransactionProps[]>(null);

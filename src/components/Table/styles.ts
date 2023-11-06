@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         borderColor: colors.darkGray,
         borderWidth: 0.5,
         borderRadius: 5,
-        backgroundColor: colors.white
+        backgroundColor: colors.white,
     },
 });
 

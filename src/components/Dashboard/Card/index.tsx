@@ -1,7 +1,7 @@
+import { ReactElement } from 'react';
 import { ActivityIndicator, ColorValue, Text, View } from 'react-native';
 import styles from '~/components/Dashboard/Card/styles';
 import { colorStyles } from '~/styles/colors';
-import { ReactElement } from 'react';
 
 interface Props {
     title: string;
