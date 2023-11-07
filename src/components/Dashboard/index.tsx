@@ -1,6 +1,6 @@
 import { AntDesign } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
-import { useCallback, useEffect, useState } from 'react';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { useCallback, useState } from 'react';
 import {
     ActivityIndicator,
     RefreshControl,
@@ -88,9 +88,7 @@ export const Dashboard: React.FC = () => {
         handleFetchTransactions();
     }, []);
 
-    useEffect(() => {
-        handleFetchDashboard();
-    }, []);
+    useFocusEffect(handleFetchDashboard);
 
     return (
         <ScrollView
@@ -109,7 +107,7 @@ export const Dashboard: React.FC = () => {
                 icon={
                     <AntDesign name='arrowup' size={40} color={colors.green} />
                 }
-                isLoading={isLoadingTotals}
+                isLoading={isLoadingTotals && !totals}
             />
             <Card
                 title='Despesas'
@@ -118,9 +116,10 @@ export const Dashboard: React.FC = () => {
                 icon={
                     <AntDesign name='arrowdown' size={40} color={colors.red} />
                 }
-                isLoading={isLoadingTotals}
+                isLoading={isLoadingTotals && !totals}
             />
-            {isLoadingData ? (
+
+            {isLoadingData && !transactions ? (
                 <ActivityIndicator size='large' color={colors.blue} />
             ) : (
                 <Table

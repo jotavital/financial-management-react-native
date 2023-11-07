@@ -22,4 +22,7 @@ export const styles = StyleSheet.create({
     errors: {
         color: colors.red,
     },
+    disabled: {
+        opacity: 0.4,
+    },
 });

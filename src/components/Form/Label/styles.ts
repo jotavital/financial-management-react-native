@@ -5,4 +5,7 @@ export const styles = StyleSheet.create({
         fontSize: 15,
         marginBottom: 3,
     },
+    disabled: {
+        opacity: 0.4,
+    },
 });

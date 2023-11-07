@@ -22,6 +22,8 @@ export const CurrencyField = <FormType extends FieldValues>({
     setValue,
     trigger,
     watch,
+    editable,
+    placeholder,
     ...rest
 }: UseControllerProps<FormType> & Props & TextInputProps) => {
     const handleChangeValue = (value: number) => {
@@ -31,13 +33,18 @@ export const CurrencyField = <FormType extends FieldValues>({
 
     return (
         <View style={styles.container}>
-            <Label text={label} />
+            <Label text={label} disabled={!editable} />
 
             <CurrencyInput
-                style={[styles.input, errors && styles.invalid]}
+                style={[
+                    styles.input,
+                    errors && styles.invalid,
+                    !editable && styles.disabled,
+                ]}
                 value={watch(name)}
                 onChangeValue={handleChangeValue}
                 prefix='R$ '
+                placeholder={editable ? placeholder : null}
                 {...rest}
             />
 

@@ -21,8 +21,14 @@ export const Picker: React.FC<PickerProps> = ({
 
     return (
         <View style={styles.container}>
-            <Label text={label} />
-            <View style={[styles.pickerInput, errors && styles.invalid]}>
+            <Label text={label} disabled={!editable} />
+            <View
+                style={[
+                    styles.pickerInput,
+                    errors && styles.invalid,
+                    !editable && styles.disabled,
+                ]}
+            >
                 <PickerLibrary
                     mode='dropdown'
                     onValueChange={(value) => handleSetValue(value)}

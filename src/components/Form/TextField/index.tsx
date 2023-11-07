@@ -13,19 +13,27 @@ export const TextField = <FormType extends FieldValues>({
     label,
     control,
     errors,
+    editable,
+    placeholder,
     ...rest
 }: UseControllerProps<FormType> & Props & TextInputProps) => (
     <View style={styles.container}>
-        <Label text={label} />
+        <Label text={label} disabled={!editable} />
 
         <Controller
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
-                    style={[styles.input, errors && styles.invalid]}
+                    style={[
+                        styles.input,
+                        errors && styles.invalid,
+                        !editable && styles.disabled,
+                    ]}
                     onChangeText={onChange}
                     onBlur={onBlur}
                     value={value}
+                    editable={editable}
+                    placeholder={editable ? placeholder : null}
                     {...rest}
                 />
             )}

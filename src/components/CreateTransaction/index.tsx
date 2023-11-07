@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigation } from '@react-navigation/native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {
     ActivityIndicator,
@@ -40,7 +40,27 @@ export const CreateTransaction: React.FC<Props> = ({ transaction }: Props) => {
         resolver: yupResolver(createTransactionSchema),
     });
 
+    // mover as api para provider
     const onSubmit = (data: any /* TODO: tipar*/) => {
+        if (transaction) {
+            return api
+                .put(
+                    `users/65446ba0f431cd94e768a0f3/transactions/${transaction?.id}`,
+                    data
+                )
+                .then((response) => {
+                    ToastAndroid.show(
+                        'Dados salvos com sucesso.',
+                        ToastAndroid.SHORT
+                    );
+
+                    if (response) {
+                        // @ts-ignore
+                        navigation.goBack();
+                    }
+                });
+        }
+
         api.post(`users/65446ba0f431cd94e768a0f3/transactions`, data).then(
             (response) => {
                 reset();
@@ -76,9 +96,17 @@ export const CreateTransaction: React.FC<Props> = ({ transaction }: Props) => {
             .finally(() => setIsLoading(false));
     };
 
+    useEffect(() => {
+        if (transaction) {
+            setValue('title', transaction.title);
+            setValue('amount', transaction.amount);
+            setValue('date', transaction.date);
+            setValue('type', transaction.type);
+        }
+    }, [transaction]);
+
     return (
         <View style={styles.container}>
-            {/* TODO: melhorar visual dos campos disabled */}
             <TextField
                 name='title'
                 label='Título'
@@ -128,12 +156,14 @@ export const CreateTransaction: React.FC<Props> = ({ transaction }: Props) => {
                     color={colors.green}
                     disabled={isLoading}
                 />
-                <Button
-                    onPress={() => handleConfirmDelete(transaction?.id)}
-                    title={'Excluir'}
-                    color={colors.red}
-                    disabled={isLoading}
-                />
+                {transaction && (
+                    <Button
+                        onPress={() => handleConfirmDelete(transaction?.id)}
+                        title={'Excluir'}
+                        color={colors.red}
+                        disabled={isLoading}
+                    />
+                )}
             </View>
 
             {isLoading && (
