@@ -41,7 +41,7 @@ export const CreateTransaction: React.FC<Props> = ({ transaction }: Props) => {
     });
 
     // mover as api para provider
-    const onSubmit = (data: any /* TODO: tipar*/) => {
+    const onSubmit = (data: unknown /* TODO: tipar*/) => {
         if (transaction) {
             return api
                 .put(
@@ -62,7 +62,7 @@ export const CreateTransaction: React.FC<Props> = ({ transaction }: Props) => {
         }
 
         api.post(`users/65446ba0f431cd94e768a0f3/transactions`, data).then(
-            (response) => {
+            () => {
                 reset();
                 ToastAndroid.show(
                     'Dados salvos com sucesso.',

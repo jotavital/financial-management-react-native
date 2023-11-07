@@ -17,7 +17,6 @@ interface Props {
 export const CurrencyField = <FormType extends FieldValues>({
     name,
     label,
-    control,
     errors,
     setValue,
     trigger,

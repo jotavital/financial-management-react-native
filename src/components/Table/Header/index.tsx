@@ -11,7 +11,7 @@ export const Header = <T,>({ columns }: Props<T>): ReactElement => {
     return (
         <View style={styles.headerContainer}>
             {columns?.map((item, index) => {
-                let borderRightStyle =
+                const borderRightStyle =
                     index !== columns.length - 1 ? styles.borderRight : null;
 
                 return (
