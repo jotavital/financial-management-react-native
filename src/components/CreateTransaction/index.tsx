@@ -21,7 +21,7 @@ import api from '~/services/api';
 import { colors } from '~/styles/colors';
 
 interface Props {
-    transaction: TransactionProps;
+    transaction?: TransactionProps;
 }
 
 export const CreateTransaction: React.FC<Props> = ({ transaction }: Props) => {
