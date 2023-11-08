@@ -16,6 +16,7 @@ module.exports = function (api) {
                         '~/schemas': './src/schemas',
                         '~/services': './src/services',
                         '~/navigators': './src/navigators',
+                        '~/assets': './src/assets',
                     },
                 },
             ],

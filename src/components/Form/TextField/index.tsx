@@ -5,6 +5,7 @@ import { styles } from '~/components/Form/TextField/styles';
 
 interface Props {
     label: string;
+    control: any;
     [x: string]: any;
 }
 
@@ -13,7 +14,7 @@ export const TextField = <FormType extends FieldValues>({
     label,
     control,
     errors,
-    editable,
+    editable = true,
     placeholder,
     ...rest
 }: UseControllerProps<FormType> & Props & TextInputProps) => (
