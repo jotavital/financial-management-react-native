@@ -2,9 +2,6 @@ import { StyleSheet } from 'react-native';
 import { colors } from '~/styles/colors';
 
 export const styles = StyleSheet.create({
-    container: {
-        marginBottom: 6,
-    },
     pickerInput: {
         borderColor: colors.darkGray,
         borderWidth: 0.5,

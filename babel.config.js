@@ -17,6 +17,7 @@ module.exports = function (api) {
                         '~/services': './src/services',
                         '~/navigators': './src/navigators',
                         '~/assets': './src/assets',
+                        '~/contexts': './src/contexts',
                     },
                 },
             ],

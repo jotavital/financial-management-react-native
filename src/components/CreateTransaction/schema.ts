@@ -1,7 +1,7 @@
 import { object, string } from 'yup';
 import { TransactionType, TransactionTypeEnum } from '~/models/transaction';
 import { momentDate } from '~/schemas/date';
-import { genericValidation } from '~/utils/validation';
+import { validationMessages } from '~/utils/validation';
 
 const transactionTypes: TransactionType[] = [
     TransactionTypeEnum.Income,
@@ -9,11 +9,11 @@ const transactionTypes: TransactionType[] = [
 ];
 
 export const createTransactionSchema = object({
-    title: string().required(genericValidation.required),
-    amount: string().required(genericValidation.required),
-    date: momentDate().required(genericValidation.required),
+    title: string().required(validationMessages.required),
+    amount: string().required(validationMessages.required),
+    date: momentDate().required(validationMessages.required),
     type: string()
         .oneOf(transactionTypes)
         .transform((value) => (value === '' ? null : value))
-        .required(genericValidation.required),
+        .required(validationMessages.required),
 });

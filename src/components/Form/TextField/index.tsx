@@ -18,7 +18,7 @@ export const TextField = <FormType extends FieldValues>({
     placeholder,
     ...rest
 }: UseControllerProps<FormType> & Props & TextInputProps) => (
-    <View style={styles.container}>
+    <View>
         <Label text={label} disabled={!editable} />
 
         <Controller

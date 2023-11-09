@@ -41,7 +41,7 @@
         "prettier-plugin-organize-imports": "^3.2.3"
     },
     "private": true,
-    "packageManager": "yarn@4.0.0",
+    "packageManager": "yarn@4.0.1",
     "lint-staged": {
         "*.{js,ts,tsx,jsx}": "prettier --write"
     }

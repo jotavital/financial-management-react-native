@@ -1,35 +1,10 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
-import { MainTabNavigator } from '~/navigators/tabs/Main';
-import { LoginScreen } from '~/screens/Login';
-import { colors } from '~/styles/colors';
-
-const Stack = createNativeStackNavigator();
+import { AuthProvider } from '~/contexts/Auth';
+import { RootNavigation } from '~/navigators';
 
 export default function App() {
     return (
-        <NavigationContainer>
-            <View style={styles.container}>
-                <StatusBar style='light' backgroundColor={colors.blue} />
-
-                <Stack.Navigator screenOptions={{ headerShown: false }}>
-                    <Stack.Screen name='Login' component={LoginScreen} />
-                    <Stack.Screen
-                        name='MainTabs'
-                        component={MainTabNavigator}
-                    />
-                </Stack.Navigator>
-            </View>
-        </NavigationContainer>
+        <AuthProvider>
+            <RootNavigation />
+        </AuthProvider>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: colors.background,
-        marginTop: 50,
-    },
-});
