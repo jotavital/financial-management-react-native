@@ -1,7 +1,9 @@
 import { createContext, useContext, useState } from 'react';
+import { SignUpSchema } from '~/screens/SignUp/types';
 
 interface AuthContextValue {
     isSignedIn: boolean;
+    signUp: (data: SignUpSchema) => void;
     signIn: () => void;
     signOut: () => void;
 }
@@ -10,6 +12,10 @@ const AuthContext = createContext<AuthContextValue>({} as AuthContextValue);
 
 export const AuthProvider = ({ children }) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
+
+    const signUp = (data: SignUpSchema) => {
+        console.log(data);
+    };
 
     const signIn = () => {
         setIsSignedIn(true);
@@ -23,6 +29,7 @@ export const AuthProvider = ({ children }) => {
         <AuthContext.Provider
             value={{
                 isSignedIn,
+                signUp,
                 signIn,
                 signOut,
             }}

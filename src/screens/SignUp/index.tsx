@@ -2,24 +2,26 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
 import { Button, Image, Text, View } from 'react-native';
-import { InferType } from 'yup';
 import { TextField } from '~/components/Form/TextField';
+import { useAuth } from '~/contexts/Auth';
 import { signUpSchema } from '~/screens/SignUp/schema';
 import styles from '~/screens/SignUp/styles';
+import { SignUpSchema } from '~/screens/SignUp/types';
 
 export const SignUpScreen: React.FC = () => {
     const {
         control,
         handleSubmit,
         formState: { errors },
-    } = useForm<InferType<typeof signUpSchema>>({
+    } = useForm<SignUpSchema>({
         resolver: yupResolver(signUpSchema),
     });
 
     const navigation = useNavigation();
+    const { signUp } = useAuth();
 
-    const handleSignUp = (data: any) => {
-        console.log(data);
+    const handleSignUp = (data: SignUpSchema) => {
+        signUp(data);
     };
 
     return (
@@ -52,12 +54,16 @@ export const SignUpScreen: React.FC = () => {
                     control={control}
                     secureTextEntry
                 />
+                <TextField
+                    label='Confirme sua Senha'
+                    name='passwordConfirmation'
+                    errors={errors.passwordConfirmation}
+                    control={control}
+                    secureTextEntry
+                />
             </View>
             {/* TODO: customizar os botões do app */}
-            <Button
-                title='Cadastrar'
-                onPress={() => handleSubmit(handleSignUp)}
-            />
+            <Button title='Cadastrar' onPress={handleSubmit(handleSignUp)} />
             <Text style={styles.signUpText}>
                 Já tem uma conta?{' '}
                 <Text

@@ -11,8 +11,8 @@ const styles = StyleSheet.create({
         width: '85%',
     },
     logo: {
-        width: 300,
-        height: 300,
+        width: 250,
+        height: 250,
     },
     title: {
         fontSize: 30,

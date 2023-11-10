@@ -47,7 +47,9 @@ export const CurrencyField = <FormType extends FieldValues>({
                 {...rest}
             />
 
-            <Text style={styles.errors}>{errors?.message}</Text>
+            {errors?.message && (
+                <Text style={styles.errors}>{errors?.message}</Text>
+            )}
         </View>
     );
 };

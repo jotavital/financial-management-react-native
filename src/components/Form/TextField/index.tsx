@@ -18,7 +18,7 @@ export const TextField = <FormType extends FieldValues>({
     placeholder,
     ...rest
 }: UseControllerProps<FormType> & Props & TextInputProps) => (
-    <View>
+    <View style={styles.container}>
         <Label text={label} disabled={!editable} />
 
         <Controller
@@ -41,6 +41,8 @@ export const TextField = <FormType extends FieldValues>({
             name={name}
         />
 
-        <Text style={styles.errors}>{errors?.message}</Text>
+        {errors?.message && (
+            <Text style={styles.errors}>{errors?.message}</Text>
+        )}
     </View>
 );

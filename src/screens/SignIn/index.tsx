@@ -48,12 +48,7 @@ export const SignInScreen: React.FC = () => {
                     secureTextEntry
                 />
             </View>
-            <Button
-                title='Entrar'
-                onPress={() => {
-                    handleSubmit(handleSignIn, (err) => console.log(err));
-                }}
-            />
+            <Button title='Entrar' onPress={handleSubmit(handleSignIn)} />
             <Text style={styles.signUpText}>
                 Não tem uma conta?{' '}
                 <Text

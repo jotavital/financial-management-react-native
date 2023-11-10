@@ -48,7 +48,9 @@ export const Picker: React.FC<PickerProps> = ({
                         })}
                 </PickerLibrary>
             </View>
-            <Text style={styles.errors}>{errors?.message}</Text>
+            {errors?.message && (
+                <Text style={styles.errors}>{errors?.message}</Text>
+            )}
         </View>
     );
 };
