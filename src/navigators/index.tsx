@@ -1,8 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { useAuth } from '~/contexts/Auth';
+import { styles } from '~/navigators/styles';
 import { MainTabNavigator } from '~/navigators/tabs/Main';
 import { SignInScreen } from '~/screens/SignIn';
 import { SignUpScreen } from '~/screens/SignUp';
@@ -41,11 +42,3 @@ export const RootNavigation: React.FC = () => {
         </NavigationContainer>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: colors.background,
-        marginTop: 50,
-    },
-});
