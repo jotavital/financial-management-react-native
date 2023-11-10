@@ -1,4 +1,3 @@
-import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
@@ -15,30 +14,22 @@ export const RootNavigation: React.FC = () => {
     const { isSignedIn } = useAuth();
 
     return (
-        <NavigationContainer>
-            <View style={styles.container}>
-                <StatusBar style='light' backgroundColor={colors.blue} />
+        <View style={styles.container}>
+            <StatusBar style='light' backgroundColor={colors.blue} />
 
-                <Stack.Navigator screenOptions={{ headerShown: false }}>
-                    {isSignedIn ? (
-                        <Stack.Screen
-                            name='MainTabs'
-                            component={MainTabNavigator}
-                        />
-                    ) : (
-                        <>
-                            <Stack.Screen
-                                name='SignIn'
-                                component={SignInScreen}
-                            />
-                            <Stack.Screen
-                                name='SignUp'
-                                component={SignUpScreen}
-                            />
-                        </>
-                    )}
-                </Stack.Navigator>
-            </View>
-        </NavigationContainer>
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
+                {isSignedIn ? (
+                    <Stack.Screen
+                        name='MainTabs'
+                        component={MainTabNavigator}
+                    />
+                ) : (
+                    <>
+                        <Stack.Screen name='SignIn' component={SignInScreen} />
+                        <Stack.Screen name='SignUp' component={SignUpScreen} />
+                    </>
+                )}
+            </Stack.Navigator>
+        </View>
     );
 };
