@@ -16,6 +16,7 @@ import { CurrencyField } from '~/components/Form/CurrencyField';
 import { DateTimePicker } from '~/components/Form/DateTimePicker';
 import { Picker } from '~/components/Form/Picker';
 import { TextField } from '~/components/Form/TextField';
+import { useAuth } from '~/contexts/Auth';
 import { TransactionProps, TransactionTypeEnum } from '~/models/transaction';
 import api from '~/services/api';
 import { colors } from '~/styles/colors';
@@ -27,6 +28,7 @@ interface Props {
 export const CreateTransaction: React.FC<Props> = ({ transaction }: Props) => {
     const navigation = useNavigation();
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const { user } = useAuth();
 
     const {
         handleSubmit,
@@ -44,10 +46,7 @@ export const CreateTransaction: React.FC<Props> = ({ transaction }: Props) => {
     const onSubmit = (data: unknown /* TODO: tipar*/) => {
         if (transaction) {
             return api
-                .put(
-                    `users/65446ba0f431cd94e768a0f3/transactions/${transaction?.id}`,
-                    data
-                )
+                .put(`users/${user?._id}/transactions/${transaction?.id}`, data)
                 .then((response) => {
                     ToastAndroid.show(
                         'Dados salvos com sucesso.',
@@ -61,15 +60,10 @@ export const CreateTransaction: React.FC<Props> = ({ transaction }: Props) => {
                 });
         }
 
-        api.post(`users/65446ba0f431cd94e768a0f3/transactions`, data).then(
-            () => {
-                reset();
-                ToastAndroid.show(
-                    'Dados salvos com sucesso.',
-                    ToastAndroid.SHORT
-                );
-            }
-        );
+        api.post(`users/${user?._id}/transactions`, data).then(() => {
+            reset();
+            ToastAndroid.show('Dados salvos com sucesso.', ToastAndroid.SHORT);
+        });
     };
 
     const handleConfirmDelete = (transactionId: string) => {
@@ -84,9 +78,7 @@ export const CreateTransaction: React.FC<Props> = ({ transaction }: Props) => {
 
     const handleDelete = (transactionId: string) => {
         setIsLoading(true);
-        api.delete(
-            `users/65446ba0f431cd94e768a0f3/transactions/${transactionId}`
-        )
+        api.delete(`users/${user?._id}/transactions/${transactionId}`)
             .then((response) => {
                 if (response) {
                     // @ts-ignore

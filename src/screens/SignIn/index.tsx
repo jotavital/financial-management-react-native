@@ -7,6 +7,7 @@ import { TextField } from '~/components/Form/TextField';
 import { useAuth } from '~/contexts/Auth';
 import { signInSchema } from '~/screens/SignIn/schema';
 import styles from '~/screens/SignIn/styles';
+import { SignInSchema } from '~/types/signIn';
 
 export const SignInScreen: React.FC = () => {
     const {
@@ -20,9 +21,8 @@ export const SignInScreen: React.FC = () => {
     const { signIn } = useAuth();
     const navigation = useNavigation();
 
-    const handleSignIn = (data: any /* TODO: tipar */) => {
-        console.log(data, errors);
-        signIn();
+    const handleSignIn = (data: SignInSchema) => {
+        signIn(data);
     };
 
     return (

@@ -12,6 +12,7 @@ import { Card } from '~/components/Dashboard/Card';
 import styles from '~/components/Dashboard/styles';
 import { Table } from '~/components/Table';
 import { TableColumns } from '~/components/Table/types';
+import { useAuth } from '~/contexts/Auth';
 import {
     TransactionProps,
     TransactionsTotalsProps,
@@ -26,6 +27,7 @@ export const DashboardScreen: React.FC = () => {
     const [isLoadingTotals, setIsLoadingTotals] = useState<boolean>(false);
     const [totals, setTotals] = useState<TransactionsTotalsProps>(null);
     const navigation = useNavigation();
+    const { user } = useAuth();
 
     const columns: TableColumns<TransactionProps> = [
         {
@@ -55,9 +57,10 @@ export const DashboardScreen: React.FC = () => {
         setIsLoadingTotals(true);
 
         api.get<TransactionsTotalsProps>(
-            'users/65446ba0f431cd94e768a0f3/transactions/totals'
+            `users/${user?._id}/transactions/totals`
         )
             .then(({ data }) => {
+                console.log(data);
                 setIsLoadingTotals(false);
                 setTotals(data);
             })
@@ -70,9 +73,7 @@ export const DashboardScreen: React.FC = () => {
     const handleFetchTransactions = useCallback(() => {
         setIsLoadingData(true);
 
-        api.get<TransactionProps[]>(
-            'users/65446ba0f431cd94e768a0f3/transactions'
-        )
+        api.get<TransactionProps[]>(`users/${user?._id}/transactions`)
             .then(({ data }) => {
                 setIsLoadingData(false);
                 setTransactions(data);

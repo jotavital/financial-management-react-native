@@ -6,7 +6,7 @@ import { TextField } from '~/components/Form/TextField';
 import { useAuth } from '~/contexts/Auth';
 import { signUpSchema } from '~/screens/SignUp/schema';
 import styles from '~/screens/SignUp/styles';
-import { SignUpSchema } from '~/screens/SignUp/types';
+import { SignUpSchema } from '~/types/signUp';
 
 export const SignUpScreen: React.FC = () => {
     const {

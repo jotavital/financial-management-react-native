@@ -1,13 +1,17 @@
 import { useNavigation } from '@react-navigation/native';
 import { createContext, useContext, useState } from 'react';
 import { ToastAndroid } from 'react-native';
-import { SignUpSchema } from '~/screens/SignUp/types';
+import { UserProps } from '~/models/user';
 import api from '~/services/api';
+import { SignInSchema } from '~/types/signIn';
+import { SignUpSchema } from '~/types/signUp';
 
 interface AuthContextValue {
     isSignedIn: boolean;
+    user: UserProps;
+
     signUp: (data: SignUpSchema) => void;
-    signIn: () => void;
+    signIn: (data: SignInSchema) => void;
     signOut: () => void;
 }
 
@@ -15,10 +19,11 @@ const AuthContext = createContext<AuthContextValue>({} as AuthContextValue);
 
 export const AuthProvider = ({ children }) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
+    const [user, setUser] = useState<UserProps>(null);
     const navigation = useNavigation();
 
     const signUp = async (data: SignUpSchema) => {
-        api.post('users', data).then((response) => {
+        api.post('users', data).then(() => {
             ToastAndroid.show(
                 'Cadastro realizado com sucesso.',
                 ToastAndroid.SHORT
@@ -28,8 +33,16 @@ export const AuthProvider = ({ children }) => {
         });
     };
 
-    const signIn = () => {
-        setIsSignedIn(true);
+    const signIn = (data: SignInSchema) => {
+        api.post<UserProps>('signin', data)
+            .then(({ data: user }) => {
+                console.log(user);
+                setUser(user);
+                setIsSignedIn(true);
+            })
+            .catch(() => {
+                setIsSignedIn(false);
+            });
     };
 
     const signOut = () => {
@@ -40,6 +53,7 @@ export const AuthProvider = ({ children }) => {
         <AuthContext.Provider
             value={{
                 isSignedIn,
+                user,
                 signUp,
                 signIn,
                 signOut,
