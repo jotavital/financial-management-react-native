@@ -1,6 +1,10 @@
 import {
+    FieldError,
+    FieldErrorsImpl,
     FieldValues,
+    Merge,
     UseControllerProps,
+    UseFormSetValue,
     UseFormTrigger,
 } from 'react-hook-form';
 import { Text, TextInputProps, View } from 'react-native';
@@ -11,7 +15,9 @@ import { Label } from '~/components/Form/Label';
 interface Props {
     label: string;
     trigger: UseFormTrigger<FieldValues>;
-    [x: string]: any;
+    setValue: UseFormSetValue<FieldValues>;
+    errors: FieldError | Merge<FieldError, FieldErrorsImpl<FieldValues>>;
+    [x: string]: unknown;
 }
 
 export const CurrencyField = <FormType extends FieldValues>({
@@ -26,6 +32,7 @@ export const CurrencyField = <FormType extends FieldValues>({
     ...rest
 }: UseControllerProps<FormType> & Props & TextInputProps) => {
     const handleChangeValue = (value: number) => {
+        // @ts-ignore
         setValue(name, value);
         trigger(name);
     };
@@ -40,6 +47,7 @@ export const CurrencyField = <FormType extends FieldValues>({
                     errors && styles.invalid,
                     !editable && styles.disabled,
                 ]}
+                // @ts-ignore
                 value={watch(name)}
                 onChangeValue={handleChangeValue}
                 prefix='R$ '
@@ -48,7 +56,7 @@ export const CurrencyField = <FormType extends FieldValues>({
             />
 
             {errors?.message && (
-                <Text style={styles.errors}>{errors?.message}</Text>
+                <Text style={styles.errors}>{String(errors?.message)}</Text>
             )}
         </View>
     );

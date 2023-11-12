@@ -1,5 +1,8 @@
 import {
+    FieldError,
+    FieldErrorsImpl,
     FieldValues,
+    Merge,
     UseFormSetValue,
     UseFormTrigger,
     UseFormWatch,
@@ -14,7 +17,7 @@ export interface PickerProps {
     name: string;
     setValue: UseFormSetValue<FieldValues>;
     label: string;
-    errors: any;
+    errors: FieldError | Merge<FieldError, FieldErrorsImpl<FieldValues>>;
     items?: PickerItem[];
     trigger: UseFormTrigger<FieldValues>;
     watch: UseFormWatch<FieldValues>;

@@ -18,10 +18,10 @@ import { TextField } from '~/components/Form/TextField';
 
 interface Props {
     label: string;
-    errors: FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
+    errors: FieldError | Merge<FieldError, FieldErrorsImpl<FieldValues>>;
     setValue: UseFormSetValue<FieldValues>;
     trigger: UseFormTrigger<FieldValues>;
-    [x: string]: any;
+    [x: string]: unknown;
 }
 
 export const DateTimePicker = ({

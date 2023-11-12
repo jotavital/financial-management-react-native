@@ -1,12 +1,21 @@
-import { Controller, FieldValues, UseControllerProps } from 'react-hook-form';
+import {
+    Control,
+    Controller,
+    FieldError,
+    FieldErrorsImpl,
+    FieldValues,
+    Merge,
+    UseControllerProps,
+} from 'react-hook-form';
 import { Text, TextInput, TextInputProps, View } from 'react-native';
 import { Label } from '~/components/Form/Label';
 import { styles } from '~/components/Form/TextField/styles';
 
 interface Props {
     label: string;
-    control: any;
-    [x: string]: any;
+    control: Control<FieldValues>;
+    errors: FieldError | Merge<FieldError, FieldErrorsImpl<FieldValues>>;
+    [x: string]: unknown;
 }
 
 export const TextField = <FormType extends FieldValues>({
@@ -42,7 +51,7 @@ export const TextField = <FormType extends FieldValues>({
         />
 
         {errors?.message && (
-            <Text style={styles.errors}>{errors?.message}</Text>
+            <Text style={styles.errors}>{String(errors?.message)}</Text>
         )}
     </View>
 );

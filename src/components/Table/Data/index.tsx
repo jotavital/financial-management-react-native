@@ -5,8 +5,10 @@ import { TableColumns } from '~/components/Table/types';
 import { colors } from '~/styles/colors';
 
 interface Props<T> {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     data: any[];
     columns: TableColumns<T>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onPress?: (item: any) => void;
 }
 
