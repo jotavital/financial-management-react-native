@@ -8,11 +8,14 @@ const api = axios.create({
 api.interceptors.response.use(
     (response) => response,
     (error) => {
-        console.error(error.request);
+        console.log(error.response.data);
+
         ToastAndroid.show(
-            'Ocorreu um erro ao processar a requisição.',
+            error.response.data.errors[0].message ??
+                'Ocorreu um erro ao processar a requisição.',
             ToastAndroid.SHORT
         );
+
         throw error;
     }
 );
