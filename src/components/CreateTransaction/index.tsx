@@ -17,9 +17,9 @@ import { DateTimePicker } from '~/components/Form/DateTimePicker';
 import { Picker } from '~/components/Form/Picker';
 import { TextField } from '~/components/Form/TextField';
 import { useAuth } from '~/contexts/Auth';
-import { TransactionProps, TransactionTypeEnum } from '~/models/transaction';
 import api from '~/services/api';
 import { colors } from '~/styles/colors';
+import { TransactionProps, TransactionTypeEnum } from '~/types/transaction';
 
 interface Props {
     transaction?: TransactionProps;

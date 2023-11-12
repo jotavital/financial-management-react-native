@@ -1,6 +1,6 @@
 import { Text } from 'react-native';
 import { styles } from '~/components/Common/FormattedAmount/styles';
-import { TransactionType, TransactionTypeEnum } from '~/models/transaction';
+import { TransactionType, TransactionTypeEnum } from '~/types/transaction';
 import { toBrl } from '~/utils/currency';
 
 interface Props {

@@ -1,11 +1,18 @@
 import axios from 'axios';
+import { getItemAsync } from 'expo-secure-store';
 import { ToastAndroid } from 'react-native';
 
 const api = axios.create({
     baseURL: process.env.EXPO_PUBLIC_API_URL,
 });
 
-// remove that shit in production
+getItemAsync('authToken').then((authToken: string) => {
+    api.defaults.headers.common = {
+        Authorization: `Bearer ${authToken}`,
+    };
+});
+
+// remove that cache headers in production
 api.defaults.headers.common = {
     'Cache-Control': 'no-cache',
     Pragma: 'no-cache',

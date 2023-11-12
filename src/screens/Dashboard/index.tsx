@@ -13,12 +13,9 @@ import styles from '~/components/Dashboard/styles';
 import { Table } from '~/components/Table';
 import { TableColumns } from '~/components/Table/types';
 import { useAuth } from '~/contexts/Auth';
-import {
-    TransactionProps,
-    TransactionsTotalsProps,
-} from '~/models/transaction';
 import api from '~/services/api';
 import { colors } from '~/styles/colors';
+import { TransactionProps, TransactionsTotalsProps } from '~/types/transaction';
 import { toBrl } from '~/utils/currency';
 
 export const DashboardScreen: React.FC = () => {
@@ -60,7 +57,6 @@ export const DashboardScreen: React.FC = () => {
             `users/${user?._id}/transactions/totals`
         )
             .then(({ data }) => {
-                console.log(data);
                 setIsLoadingTotals(false);
                 setTotals(data);
             })

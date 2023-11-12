@@ -1,6 +1,6 @@
 import { object, string } from 'yup';
-import { TransactionType, TransactionTypeEnum } from '~/models/transaction';
 import { momentDate } from '~/schemas/date';
+import { TransactionType, TransactionTypeEnum } from '~/types/transaction';
 import { validationMessages } from '~/utils/validation';
 
 const transactionTypes: TransactionType[] = [

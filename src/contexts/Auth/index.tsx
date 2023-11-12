@@ -1,10 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
+import { setItemAsync } from 'expo-secure-store';
 import { createContext, useContext, useState } from 'react';
 import { ToastAndroid } from 'react-native';
-import { UserProps } from '~/models/user';
 import api from '~/services/api';
-import { SignInSchema } from '~/types/signIn';
+import { SignInResponse, SignInSchema } from '~/types/signIn';
 import { SignUpSchema } from '~/types/signUp';
+import { UserProps } from '~/types/user';
 
 interface AuthContextValue {
     isSignedIn: boolean;
@@ -34,10 +35,11 @@ export const AuthProvider = ({ children }) => {
     };
 
     const signIn = (data: SignInSchema) => {
-        api.post<UserProps>('signin', data)
-            .then(({ data: user }) => {
-                console.log(user);
-                setUser(user);
+        api.post<SignInResponse>('signin', data)
+            .then(async ({ data }) => {
+                await setItemAsync('authToken', data.token);
+
+                setUser(data.user);
                 setIsSignedIn(true);
             })
             .catch(() => {

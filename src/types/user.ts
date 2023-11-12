@@ -1,4 +1,4 @@
-import { TransactionProps } from '~/models/transaction';
+import { TransactionProps } from '~/types/transaction';
 
 export interface UserProps {
     _id: string;
@@ -7,4 +7,5 @@ export interface UserProps {
     transactions: TransactionProps[];
     createdAt: Date;
     updatedAt: Date;
+    accessToken?: string;
 }

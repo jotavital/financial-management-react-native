@@ -18,6 +18,7 @@ module.exports = function (api) {
                         '~/navigators': './src/navigators',
                         '~/assets': './src/assets',
                         '~/contexts': './src/contexts',
+                        '~/types': './src/types',
                     },
                 },
             ],

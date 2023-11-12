@@ -2,7 +2,7 @@ import {
     ReadableTransactionType,
     TransactionType,
     TransactionTypeEnum,
-} from '~/models/transaction';
+} from '~/types/transaction';
 
 export const formatTransactionType = (
     type: TransactionType
