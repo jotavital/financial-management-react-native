@@ -5,6 +5,13 @@ const api = axios.create({
     baseURL: process.env.EXPO_PUBLIC_API_URL,
 });
 
+// remove that shit in production
+api.defaults.headers.common = {
+    'Cache-Control': 'no-cache',
+    Pragma: 'no-cache',
+    Expires: '0',
+};
+
 api.interceptors.response.use(
     (response) => response,
     (error) => {
