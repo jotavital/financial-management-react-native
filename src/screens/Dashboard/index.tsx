@@ -53,9 +53,7 @@ export const DashboardScreen: React.FC = () => {
     const handleFetchTotals = useCallback(() => {
         setIsLoadingTotals(true);
 
-        api.get<TransactionsTotalsProps>(
-            `users/${user?._id}/transactions/totals`
-        )
+        api.get<TransactionsTotalsProps>(`transactions/totals`)
             .then(({ data }) => {
                 setIsLoadingTotals(false);
                 setTotals(data);
@@ -69,7 +67,7 @@ export const DashboardScreen: React.FC = () => {
     const handleFetchTransactions = useCallback(() => {
         setIsLoadingData(true);
 
-        api.get<TransactionProps[]>(`users/${user?._id}/transactions`)
+        api.get<TransactionProps[]>(`transactions`)
             .then(({ data }) => {
                 setIsLoadingData(false);
                 setTransactions(data);
