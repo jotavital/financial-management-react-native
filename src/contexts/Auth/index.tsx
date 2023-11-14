@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
-import { setItemAsync } from 'expo-secure-store';
-import { createContext, useContext, useState } from 'react';
+import { deleteItemAsync, getItemAsync, setItemAsync } from 'expo-secure-store';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { ToastAndroid } from 'react-native';
 import api from '~/services/api';
 import { SignInResponse, SignInSchema } from '~/types/signIn';
@@ -35,7 +35,10 @@ export const AuthProvider = ({ children }) => {
     };
 
     const signIn = (data: SignInSchema) => {
-        api.post<SignInResponse>('signin', data)
+        api.post<SignInResponse>(
+            `${process.env.EXPO_PUBLIC_API_HOST}/api/signin`,
+            data
+        )
             .then(async ({ data }) => {
                 await setItemAsync('authToken', data.token);
 
@@ -47,9 +50,23 @@ export const AuthProvider = ({ children }) => {
             });
     };
 
+    // TODO: deslogar automaticamente caso token expirado
     const signOut = () => {
         setIsSignedIn(false);
+        deleteItemAsync('authToken');
     };
+
+    useEffect(() => {
+        getItemAsync('authToken')
+            .then((authToken) => {
+                if (authToken) {
+                    setIsSignedIn(true);
+                } else {
+                    setIsSignedIn(false);
+                }
+            })
+            .catch(() => setIsSignedIn(false));
+    }, []);
 
     return (
         <AuthContext.Provider

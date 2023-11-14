@@ -22,10 +22,15 @@ api.defaults.headers.common = {
 api.interceptors.response.use(
     (response) => response,
     (error) => {
-        console.log(error.response.data);
+        console.log(error);
+        console.log(error.response?.data);
+
+        if (error.response?.status === 401) {
+            console.log('sign out');
+        }
 
         ToastAndroid.show(
-            error.response.data.errors[0].message ??
+            error.response?.data.errors[0].message ??
                 'Ocorreu um erro ao processar a requisição.',
             ToastAndroid.SHORT
         );
