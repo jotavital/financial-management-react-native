@@ -42,7 +42,7 @@ export const CreateTransaction: React.FC<Props> = ({ transaction }: Props) => {
         resolver: yupResolver(createTransactionSchema),
     });
 
-    // mover as api para provider
+    // TODO: mover as api para provider
     const onSubmit = (data: unknown /* TODO: tipar*/) => {
         if (transaction) {
             return api

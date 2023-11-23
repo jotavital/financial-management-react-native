@@ -42,6 +42,11 @@ export const AuthProvider = ({ children }) => {
             .then(async ({ data }) => {
                 await setItemAsync('authToken', data.token);
 
+                if (!data.user) {
+                    setIsSignedIn(false);
+                    return;
+                }
+
                 setUser(data.user);
                 setIsSignedIn(true);
             })
