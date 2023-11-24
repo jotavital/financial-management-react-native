@@ -2,13 +2,17 @@ import { useNavigation } from '@react-navigation/native';
 import { deleteItemAsync, getItemAsync, setItemAsync } from 'expo-secure-store';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { ToastAndroid } from 'react-native';
+import { useDispatch } from 'react-redux';
+import {
+    signIn as dispatchSignIn,
+    signOut as dispatchSignOut,
+} from '~/redux/slices/authSlice';
 import api from '~/services/api';
 import { SignInResponse, SignInSchema } from '~/types/signIn';
 import { SignUpSchema } from '~/types/signUp';
 import { UserProps } from '~/types/user';
 
 interface AuthContextValue {
-    isSignedIn: boolean;
     user: UserProps;
 
     signUp: (data: SignUpSchema) => void;
@@ -19,9 +23,9 @@ interface AuthContextValue {
 const AuthContext = createContext<AuthContextValue>({} as AuthContextValue);
 
 export const AuthProvider = ({ children }) => {
-    const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
     const [user, setUser] = useState<UserProps>(null);
     const navigation = useNavigation();
+    const dispatch = useDispatch();
 
     const signUp = async (data: SignUpSchema) => {
         api.post('users', data).then(() => {
@@ -43,21 +47,21 @@ export const AuthProvider = ({ children }) => {
                 await setItemAsync('authToken', data.token);
 
                 if (!data.user) {
-                    setIsSignedIn(false);
+                    dispatch(dispatchSignOut());
                     return;
                 }
 
                 setUser(data.user);
-                setIsSignedIn(true);
+                dispatch(dispatchSignIn());
             })
             .catch(() => {
-                setIsSignedIn(false);
+                dispatch(dispatchSignOut());
             });
     };
 
     // TODO: deslogar automaticamente caso token expirado
     const signOut = () => {
-        setIsSignedIn(false);
+        dispatch(dispatchSignOut());
         deleteItemAsync('authToken');
     };
 
@@ -65,18 +69,17 @@ export const AuthProvider = ({ children }) => {
         getItemAsync('authToken')
             .then((authToken) => {
                 if (authToken) {
-                    setIsSignedIn(true);
+                    dispatch(dispatchSignIn());
                 } else {
-                    setIsSignedIn(false);
+                    dispatch(dispatchSignOut());
                 }
             })
-            .catch(() => setIsSignedIn(false));
+            .catch(() => dispatch(dispatchSignOut()));
     }, []);
 
     return (
         <AuthContext.Provider
             value={{
-                isSignedIn,
                 user,
                 signUp,
                 signIn,

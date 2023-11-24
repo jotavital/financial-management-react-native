@@ -1,9 +1,10 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
-import { useAuth } from '~/contexts/Auth';
+import { useSelector } from 'react-redux';
 import { styles } from '~/navigators/styles';
 import { MainTabNavigator } from '~/navigators/tabs/Main';
+import { selectIsSignedIn } from '~/redux/slices/authSlice';
 import { SignInScreen } from '~/screens/SignIn';
 import { SignUpScreen } from '~/screens/SignUp';
 import { colors } from '~/styles/colors';
@@ -11,7 +12,7 @@ import { colors } from '~/styles/colors';
 const Stack = createNativeStackNavigator();
 
 export const RootNavigation: React.FC = () => {
-    const { isSignedIn } = useAuth();
+    const isSignedIn = useSelector(selectIsSignedIn);
 
     return (
         <View style={styles.container}>

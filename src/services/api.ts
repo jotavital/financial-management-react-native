@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { getItemAsync } from 'expo-secure-store';
 import { ToastAndroid } from 'react-native';
+import { signOut } from '~/redux/slices/authSlice';
+import { store } from '~/redux/store';
 
 const api = axios.create({
     baseURL: process.env.EXPO_PUBLIC_API_URL,
@@ -26,7 +28,7 @@ api.interceptors.response.use(
         console.log(error.response?.data);
 
         if (error.response?.status === 401) {
-            console.log('sign out');
+            store.dispatch(signOut());
         }
 
         ToastAndroid.show(

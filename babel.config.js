@@ -19,6 +19,8 @@ module.exports = function (api) {
                         '~/assets': './src/assets',
                         '~/contexts': './src/contexts',
                         '~/types': './src/types',
+                        '~/hooks': './src/hooks',
+                        '~/redux': './src/redux',
                     },
                 },
             ],
