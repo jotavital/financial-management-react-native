@@ -21,6 +21,23 @@ api.defaults.headers.common = {
     Expires: '0',
 };
 
+api.interceptors.request.use(
+    async (config) => {
+        const authToken = await getItemAsync('authToken').then(
+            (authToken: string) => authToken
+        );
+
+        if (authToken) {
+            config.headers.Authorization = `Bearer ${authToken}`;
+        }
+
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
+
 api.interceptors.response.use(
     (response) => response,
     (error) => {
