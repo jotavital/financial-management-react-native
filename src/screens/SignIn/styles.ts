@@ -5,6 +5,8 @@ const styles = StyleSheet.create({
     container: {
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center',
+        height: '100%',
     },
     inputContainer: {
         display: 'flex',
@@ -12,7 +14,7 @@ const styles = StyleSheet.create({
     },
     logo: {
         width: 300,
-        height: 300,
+        height: 200,
     },
     title: {
         fontSize: 30,

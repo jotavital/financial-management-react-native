@@ -1,8 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import { View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
-import { styles } from '~/navigators/styles';
 import { MainTabNavigator } from '~/navigators/tabs/Main';
 import { selectIsSignedIn } from '~/redux/slices/authSlice';
 import { SignInScreen } from '~/screens/SignIn';
@@ -15,7 +14,7 @@ export const RootNavigation: React.FC = () => {
     const isSignedIn = useSelector(selectIsSignedIn);
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={{ flex: 1 }}>
             <StatusBar style='light' backgroundColor={colors.blue} />
 
             <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -31,6 +30,6 @@ export const RootNavigation: React.FC = () => {
                     </>
                 )}
             </Stack.Navigator>
-        </View>
+        </SafeAreaView>
     );
 };

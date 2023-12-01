@@ -6,7 +6,8 @@ const colors = {
     blue: '#0496ff',
     yellow: '#FFD166',
     darkGray: '#073B4C',
-    background: '#e9ecef',
+    lighGray: '#c9c9c9',
+    background: '#ededed',
 };
 
 const colorStyles = {

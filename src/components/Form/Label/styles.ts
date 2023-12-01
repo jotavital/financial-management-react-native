@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { formStyles } from '~/styles/forms';
 
 export const styles = StyleSheet.create({
     label: {
@@ -6,6 +7,6 @@ export const styles = StyleSheet.create({
         marginBottom: 3,
     },
     disabled: {
-        opacity: 0.4,
+        ...formStyles.disabled,
     },
 });

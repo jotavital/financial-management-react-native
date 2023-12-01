@@ -1,27 +1,20 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '~/styles/colors';
+import { formStyles } from '~/styles/forms';
 
 export const styles = StyleSheet.create({
-    container: {
-        marginBottom: 15,
-    },
+    container: { ...formStyles.container },
     pickerInput: {
-        borderColor: colors.darkGray,
-        borderWidth: 0.5,
-        borderRadius: 5,
-        maxHeight: 43,
         display: 'flex',
         justifyContent: 'center',
+        ...formStyles.input,
     },
     invalid: {
-        borderColor: colors.red,
-        borderWidth: 0.7,
-        borderRadius: 5,
+        ...formStyles.invalid,
     },
     errors: {
-        color: colors.red,
+        ...formStyles.errors,
     },
     disabled: {
-        opacity: 0.4,
+        ...formStyles.disabled,
     },
 });
