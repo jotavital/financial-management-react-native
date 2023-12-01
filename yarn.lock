@@ -4978,6 +4978,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-splash-screen@npm:~0.20.5":
+  version: 0.20.5
+  resolution: "expo-splash-screen@npm:0.20.5"
+  dependencies:
+    "@expo/prebuild-config": "npm:6.2.6"
+  peerDependencies:
+    expo: "*"
+  checksum: c64cd73648dfcd8ccdaea52ec08d70b79a33c835769b0f71c6c2680d804e7fb3999dd67bb85eb9064e035fe5ff88f075d1e553c838ca1bbb384a0ba8ae4fd033
+  languageName: node
+  linkType: hard
+
 "expo-status-bar@npm:~1.6.0":
   version: 1.6.0
   resolution: "expo-status-bar@npm:1.6.0"
@@ -5184,6 +5195,7 @@ __metadata:
     eslint: "npm:^8.53.0"
     expo: "npm:~49.0.13"
     expo-secure-store: "npm:~12.3.1"
+    expo-splash-screen: "npm:~0.20.5"
     expo-status-bar: "npm:~1.6.0"
     moment: "npm:^2.29.4"
     prettier: "npm:^3.0.3"

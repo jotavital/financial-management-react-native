@@ -1,5 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { hideAsync } from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
+import { useCallback } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import { MainTabNavigator } from '~/navigators/tabs/Main';
@@ -13,8 +15,12 @@ const Stack = createNativeStackNavigator();
 export const RootNavigation: React.FC = () => {
     const isSignedIn = useSelector(selectIsSignedIn);
 
+    const onLayoutRootView = useCallback(async () => {
+        await hideAsync();
+    }, [isSignedIn]);
+
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1 }} onLayout={onLayoutRootView}>
             <StatusBar style='light' backgroundColor={colors.blue} />
 
             <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -22,6 +28,7 @@ export const RootNavigation: React.FC = () => {
                     <Stack.Screen
                         name='MainTabs'
                         component={MainTabNavigator}
+                        options={{ animation: 'none' }}
                     />
                 ) : (
                     <>
