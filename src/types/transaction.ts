@@ -8,7 +8,7 @@ export enum TransactionTypeEnum {
 export type ReadableTransactionType = 'Receita' | 'Despesa';
 
 export interface TransactionProps {
-    id: string;
+    id?: string;
     title: string;
     amount: number;
     date: string;

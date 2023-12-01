@@ -1,14 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigation } from '@react-navigation/native';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import {
-    ActivityIndicator,
-    Alert,
-    Button,
-    ToastAndroid,
-    View,
-} from 'react-native';
+import { ActivityIndicator, Alert, Button, View } from 'react-native';
 import { InferType } from 'yup';
 import { createTransactionSchema } from '~/components/CreateTransaction/schema';
 import { styles } from '~/components/CreateTransaction/styles';
@@ -16,8 +9,7 @@ import { CurrencyField } from '~/components/Form/CurrencyField';
 import { DateTimePicker } from '~/components/Form/DateTimePicker';
 import { Picker } from '~/components/Form/Picker';
 import { TextField } from '~/components/Form/TextField';
-import { useAuth } from '~/contexts/Auth';
-import api from '~/services/api';
+import { useTransactions } from '~/contexts/Transactions';
 import { colors } from '~/styles/colors';
 import { TransactionProps, TransactionTypeEnum } from '~/types/transaction';
 
@@ -26,9 +18,12 @@ interface Props {
 }
 
 export const CreateTransaction: React.FC<Props> = ({ transaction }: Props) => {
-    const navigation = useNavigation();
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const { user } = useAuth();
+    const {
+        updateTransaction,
+        storeTransaction,
+        deleteTransaction,
+        isLoading,
+    } = useTransactions();
 
     const {
         handleSubmit,
@@ -42,28 +37,12 @@ export const CreateTransaction: React.FC<Props> = ({ transaction }: Props) => {
         resolver: yupResolver(createTransactionSchema),
     });
 
-    // TODO: mover as api para provider
-    const onSubmit = (data: unknown /* TODO: tipar*/) => {
+    const onSubmit = (data: TransactionProps) => {
         if (transaction) {
-            return api
-                .put(`users/${user?._id}/transactions/${transaction?.id}`, data)
-                .then((response) => {
-                    ToastAndroid.show(
-                        'Dados salvos com sucesso.',
-                        ToastAndroid.SHORT
-                    );
-
-                    if (response) {
-                        // @ts-ignore
-                        navigation.goBack();
-                    }
-                });
+            return updateTransaction(transaction.id, data);
         }
 
-        api.post(`users/${user?._id}/transactions`, data).then(() => {
-            reset();
-            ToastAndroid.show('Dados salvos com sucesso.', ToastAndroid.SHORT);
-        });
+        storeTransaction(data, reset);
     };
 
     const handleConfirmDelete = (transactionId: string) => {
@@ -72,20 +51,11 @@ export const CreateTransaction: React.FC<Props> = ({ transaction }: Props) => {
                 text: 'Voltar',
                 style: 'cancel',
             },
-            { text: 'Excluir', onPress: () => handleDelete(transactionId) },
+            {
+                text: 'Excluir',
+                onPress: () => deleteTransaction(transactionId),
+            },
         ]);
-    };
-
-    const handleDelete = (transactionId: string) => {
-        setIsLoading(true);
-        api.delete(`users/${user?._id}/transactions/${transactionId}`)
-            .then((response) => {
-                if (response) {
-                    // @ts-ignore
-                    navigation.goBack();
-                }
-            })
-            .finally(() => setIsLoading(false));
     };
 
     useEffect(() => {

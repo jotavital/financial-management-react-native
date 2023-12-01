@@ -1,5 +1,5 @@
 export const toBrl = (amount: number): string => {
-    if (!amount) {
+    if (!amount && amount !== 0) {
         return '-';
     }
 

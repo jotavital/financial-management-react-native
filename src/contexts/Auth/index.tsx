@@ -59,7 +59,6 @@ export const AuthProvider = ({ children }) => {
             });
     };
 
-    // TODO: deslogar automaticamente caso token expirado
     const signOut = () => {
         dispatch(dispatchSignOut());
         deleteItemAsync('authToken');

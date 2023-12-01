@@ -1,6 +1,6 @@
 import { AntDesign } from '@expo/vector-icons';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import {
     ActivityIndicator,
     RefreshControl,
@@ -12,19 +12,21 @@ import { Card } from '~/components/Dashboard/Card';
 import styles from '~/components/Dashboard/styles';
 import { Table } from '~/components/Table';
 import { TableColumns } from '~/components/Table/types';
-import { useAuth } from '~/contexts/Auth';
-import api from '~/services/api';
+import { useTransactions } from '~/contexts/Transactions';
 import { colors } from '~/styles/colors';
-import { TransactionProps, TransactionsTotalsProps } from '~/types/transaction';
+import { TransactionProps } from '~/types/transaction';
 import { toBrl } from '~/utils/currency';
 
 export const DashboardScreen: React.FC = () => {
-    const [transactions, setTransactions] = useState<TransactionProps[]>(null);
-    const [isLoadingData, setIsLoadingData] = useState<boolean>(false);
-    const [isLoadingTotals, setIsLoadingTotals] = useState<boolean>(false);
-    const [totals, setTotals] = useState<TransactionsTotalsProps>(null);
     const navigation = useNavigation();
-    const { user } = useAuth();
+    const {
+        fetchTotals,
+        totals,
+        isLoadingTotals,
+        fetchTransactions,
+        isLoadingTransactions,
+        transactions,
+    } = useTransactions();
 
     const columns: TableColumns<TransactionProps> = [
         {
@@ -49,38 +51,9 @@ export const DashboardScreen: React.FC = () => {
         },
     ];
 
-    // TODO: colocar num context
-    const handleFetchTotals = useCallback(() => {
-        setIsLoadingTotals(true);
-
-        api.get<TransactionsTotalsProps>(`transactions/totals`)
-            .then(({ data }) => {
-                setIsLoadingTotals(false);
-                setTotals(data);
-            })
-            .catch(() => {
-                setIsLoadingTotals(false);
-                setTotals(null);
-            });
-    }, []);
-
-    const handleFetchTransactions = useCallback(() => {
-        setIsLoadingData(true);
-
-        api.get<TransactionProps[]>(`transactions`)
-            .then(({ data }) => {
-                setIsLoadingData(false);
-                setTransactions(data);
-            })
-            .catch(() => {
-                setIsLoadingData(false);
-                setTransactions(null);
-            });
-    }, []);
-
     const handleFetchDashboard = useCallback(() => {
-        handleFetchTotals();
-        handleFetchTransactions();
+        fetchTotals();
+        fetchTransactions();
     }, []);
 
     useFocusEffect(handleFetchDashboard);
@@ -90,7 +63,7 @@ export const DashboardScreen: React.FC = () => {
             contentContainerStyle={styles.contentContainer}
             refreshControl={
                 <RefreshControl
-                    refreshing={isLoadingData}
+                    refreshing={isLoadingTransactions}
                     onRefresh={handleFetchDashboard}
                 />
             }
@@ -114,7 +87,7 @@ export const DashboardScreen: React.FC = () => {
                 isLoading={isLoadingTotals && !totals}
             />
 
-            {isLoadingData && !transactions ? (
+            {isLoadingTransactions && !transactions ? (
                 <ActivityIndicator size='large' color={colors.blue} />
             ) : (
                 <Table
