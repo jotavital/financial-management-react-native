@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { deleteItemAsync } from 'expo-secure-store';
 import { RootState } from '~/redux/store';
 
 export const authSlice = createSlice({
@@ -11,6 +12,7 @@ export const authSlice = createSlice({
             state.isSignedIn = true;
         },
         signOut: (state) => {
+            deleteItemAsync('authToken');
             state.isSignedIn = false;
         },
     },

@@ -8,7 +8,7 @@ const formStyles = StyleSheet.create({
     input: {
         borderColor: colors.lighGray,
         borderWidth: 0.5,
-        borderRadius: 5,
+        borderRadius: 6,
         padding: 6,
         height: 43,
         maxHeight: 43,

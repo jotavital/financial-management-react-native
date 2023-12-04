@@ -6,6 +6,7 @@ import { store } from '~/redux/store';
 
 const api = axios.create({
     baseURL: process.env.EXPO_PUBLIC_API_URL,
+    timeout: 10000,
 });
 
 getItemAsync('authToken').then((authToken: string) => {

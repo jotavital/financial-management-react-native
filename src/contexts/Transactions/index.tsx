@@ -41,6 +41,7 @@ export const TransactionsProvider = ({ children }) => {
 
     // TODO mover os fetch para services e eliminar os useState
     // TODO usar react-query
+    // TODO usar promise all
     const fetchTotals = () => {
         setIsLoadingTotals(true);
 
