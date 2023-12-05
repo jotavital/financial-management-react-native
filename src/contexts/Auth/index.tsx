@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
-import { deleteItemAsync, getItemAsync, setItemAsync } from 'expo-secure-store';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { getItemAsync } from 'expo-secure-store';
+import { createContext, useContext, useEffect } from 'react';
 import { ToastAndroid } from 'react-native';
 import { useDispatch } from 'react-redux';
 import {
@@ -10,11 +10,8 @@ import {
 import api from '~/services/api';
 import { SignInResponse, SignInSchema } from '~/types/signIn';
 import { SignUpSchema } from '~/types/signUp';
-import { UserProps } from '~/types/user';
 
 interface AuthContextValue {
-    user: UserProps;
-
     signUp: (data: SignUpSchema) => void;
     signIn: (data: SignInSchema) => void;
     signOut: () => void;
@@ -23,7 +20,6 @@ interface AuthContextValue {
 const AuthContext = createContext<AuthContextValue>({} as AuthContextValue);
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState<UserProps>(null);
     const navigation = useNavigation();
     const dispatch = useDispatch();
 
@@ -44,15 +40,12 @@ export const AuthProvider = ({ children }) => {
             data
         )
             .then(async ({ data }) => {
-                await setItemAsync('authToken', data.token);
-
-                if (!data.user) {
+                if (!data.token) {
                     dispatch(dispatchSignOut());
                     return;
                 }
 
-                setUser(data.user);
-                dispatch(dispatchSignIn());
+                dispatch(dispatchSignIn(data));
             })
             .catch(() => {
                 dispatch(dispatchSignOut());
@@ -61,25 +54,25 @@ export const AuthProvider = ({ children }) => {
 
     const signOut = () => {
         dispatch(dispatchSignOut());
-        deleteItemAsync('authToken');
     };
 
     useEffect(() => {
         getItemAsync('authToken')
-            .then((authToken) => {
-                if (authToken) {
-                    dispatch(dispatchSignIn());
+            .then((token) => {
+                if (token) {
+                    dispatch(dispatchSignIn({ token }));
                 } else {
                     dispatch(dispatchSignOut());
                 }
             })
-            .catch(() => dispatch(dispatchSignOut()));
+            .catch((error) => {
+                dispatch(dispatchSignOut());
+            });
     }, []);
 
     return (
         <AuthContext.Provider
             value={{
-                user,
                 signUp,
                 signIn,
                 signOut,

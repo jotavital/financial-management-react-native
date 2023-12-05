@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { deleteItemAsync } from 'expo-secure-store';
+import { deleteItemAsync, setItemAsync } from 'expo-secure-store';
 import { RootState } from '~/redux/store';
+import { SignInResponse } from '~/types/signIn';
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -8,11 +9,20 @@ export const authSlice = createSlice({
         isSignedIn: false,
     },
     reducers: {
-        signIn: (state) => {
+        signIn: (
+            state,
+            action: {
+                payload: SignInResponse;
+            }
+        ) => {
+            // TODO precisa fazer isso assincrono
+            setItemAsync('authToken', action.payload.token);
+
             state.isSignedIn = true;
         },
         signOut: (state) => {
             deleteItemAsync('authToken');
+
             state.isSignedIn = false;
         },
     },
