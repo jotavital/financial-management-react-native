@@ -7,5 +7,9 @@ export interface UserProps {
     transactions: TransactionProps[];
     createdAt: Date;
     updatedAt: Date;
-    accessToken?: string;
+}
+
+export interface UserBasicInfo {
+    name: string;
+    email: string;
 }

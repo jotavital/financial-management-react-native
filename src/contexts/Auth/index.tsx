@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import {
     signIn as dispatchSignIn,
     signOut as dispatchSignOut,
+    getUserFromStorage,
 } from '~/redux/slices/authSlice';
 import api from '~/services/api';
 import { SignInResponse, SignInSchema } from '~/types/signIn';
@@ -21,7 +22,7 @@ const AuthContext = createContext<AuthContextValue>({} as AuthContextValue);
 
 export const AuthProvider = ({ children }) => {
     const navigation = useNavigation();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<any>();
 
     const signUp = async (data: SignUpSchema) => {
         api.post('users', data).then(() => {
@@ -57,17 +58,19 @@ export const AuthProvider = ({ children }) => {
     };
 
     useEffect(() => {
-        getItemAsync('authToken')
-            .then((token) => {
-                if (token) {
-                    dispatch(dispatchSignIn({ token }));
-                } else {
-                    dispatch(dispatchSignOut());
-                }
-            })
-            .catch((error) => {
-                dispatch(dispatchSignOut());
-            });
+        const getItems = async () => {
+            const token = await getItemAsync('authToken');
+            const user = await getItemAsync('user');
+
+            if (token && user) {
+                dispatch(getUserFromStorage());
+                return dispatch(dispatchSignIn());
+            }
+
+            dispatch(dispatchSignOut());
+        };
+
+        getItems();
     }, []);
 
     return (
