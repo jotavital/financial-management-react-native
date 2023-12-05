@@ -5197,6 +5197,7 @@ __metadata:
     expo-secure-store: "npm:~12.3.1"
     expo-splash-screen: "npm:~0.20.5"
     expo-status-bar: "npm:~1.6.0"
+    husky: "npm:^8.0.3"
     moment: "npm:^2.29.4"
     prettier: "npm:^3.0.3"
     prettier-plugin-organize-imports: "npm:^3.2.3"
@@ -5819,6 +5820,15 @@ __metadata:
   dependencies:
     ms: "npm:^2.0.0"
   checksum: f34a2c20161d02303c2807badec2f3b49cbfbbb409abd4f95a07377ae01cfe6b59e3d15ac609cffcd8f2521f0eb37b7e1091acf65da99aa2a4f1ad63c21e7e7a
+  languageName: node
+  linkType: hard
+
+"husky@npm:^8.0.3":
+  version: 8.0.3
+  resolution: "husky@npm:8.0.3"
+  bin:
+    husky: lib/bin.js
+  checksum: 6722591771c657b91a1abb082e07f6547eca79144d678e586828ae806499d90dce2a6aee08b66183fd8b085f19d20e0990a2ad396961746b4c8bd5bdb619d668
   languageName: node
   linkType: hard
 
