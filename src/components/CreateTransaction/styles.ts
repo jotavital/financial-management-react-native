@@ -4,6 +4,8 @@ export const styles = StyleSheet.create({
     container: {
         height: '100%',
         padding: 20,
+        display: 'flex',
+        gap: 8,
     },
     buttonContainer: {
         gap: 8,

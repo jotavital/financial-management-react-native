@@ -7,6 +7,7 @@ import { PickerProps } from '~/components/Form/Picker/types';
 export const Picker: React.FC<PickerProps> = ({
     name,
     label,
+    placeholder,
     errors,
     setValue,
     trigger,
@@ -21,7 +22,7 @@ export const Picker: React.FC<PickerProps> = ({
 
     return (
         <View style={styles.container}>
-            <Label text={label} disabled={!editable} />
+            {label ? <Label text={label} disabled={!editable} /> : null}
             <View
                 style={[
                     styles.pickerInput,
@@ -35,7 +36,10 @@ export const Picker: React.FC<PickerProps> = ({
                     selectedValue={watch(name)}
                     enabled={editable}
                 >
-                    <PickerLibrary.Item label='Selecione um item' value='' />
+                    <PickerLibrary.Item
+                        label={placeholder ?? 'Selecione um item'}
+                        value=''
+                    />
                     {items &&
                         items.map((item) => {
                             return (
@@ -49,7 +53,7 @@ export const Picker: React.FC<PickerProps> = ({
                 </PickerLibrary>
             </View>
             {errors?.message && (
-                <Text style={styles.errors}>{errors?.message}</Text>
+                <Text style={styles.errors}>{String(errors?.message)}</Text>
             )}
         </View>
     );

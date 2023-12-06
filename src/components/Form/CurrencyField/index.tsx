@@ -13,7 +13,7 @@ import { styles } from '~/components/Form/CurrencyField/styles';
 import { Label } from '~/components/Form/Label';
 
 interface Props {
-    label: string;
+    label?: string;
     trigger: UseFormTrigger<FieldValues>;
     setValue: UseFormSetValue<FieldValues>;
     errors: FieldError | Merge<FieldError, FieldErrorsImpl<FieldValues>>;
@@ -39,7 +39,7 @@ export const CurrencyField = <FormType extends FieldValues>({
 
     return (
         <View style={styles.container}>
-            <Label text={label} disabled={!editable} />
+            {label ? <Label text={label} disabled={!editable} /> : null}
 
             <CurrencyInput
                 style={[

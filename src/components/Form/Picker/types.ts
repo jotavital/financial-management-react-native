@@ -16,7 +16,8 @@ interface PickerItem {
 export interface PickerProps {
     name: string;
     setValue: UseFormSetValue<FieldValues>;
-    label: string;
+    label?: string;
+    placeholder?: string;
     errors: FieldError | Merge<FieldError, FieldErrorsImpl<FieldValues>>;
     items?: PickerItem[];
     trigger: UseFormTrigger<FieldValues>;

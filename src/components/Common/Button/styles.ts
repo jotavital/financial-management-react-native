@@ -17,4 +17,10 @@ export const styles = StyleSheet.create({
         fontWeight: '500',
         fontSize: 15,
     },
+    disabled: {
+        color: colors.white,
+        fontWeight: '500',
+        opacity: 0.7,
+        fontSize: 15,
+    },
 });

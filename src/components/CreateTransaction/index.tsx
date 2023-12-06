@@ -1,8 +1,9 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { ActivityIndicator, Alert, Button, View } from 'react-native';
+import { ActivityIndicator, Alert, View } from 'react-native';
 import { InferType } from 'yup';
+import { Button } from '~/components/Common/Button';
 import { createTransactionSchema } from '~/components/CreateTransaction/schema';
 import { styles } from '~/components/CreateTransaction/styles';
 import { CurrencyField } from '~/components/Form/CurrencyField';
@@ -71,7 +72,6 @@ export const CreateTransaction: React.FC<Props> = ({ transaction }: Props) => {
         <View style={styles.container}>
             <TextField
                 name='title'
-                label='Título'
                 placeholder='Título'
                 control={control}
                 errors={errors.title}
@@ -79,7 +79,6 @@ export const CreateTransaction: React.FC<Props> = ({ transaction }: Props) => {
             />
             <CurrencyField
                 name='amount'
-                label='Valor'
                 placeholder='Valor'
                 errors={errors.amount}
                 setValue={setValue}
@@ -89,7 +88,6 @@ export const CreateTransaction: React.FC<Props> = ({ transaction }: Props) => {
             />
             <DateTimePicker
                 name='date'
-                label='Data'
                 placeholder='Data'
                 control={control}
                 errors={errors.date}
@@ -99,7 +97,6 @@ export const CreateTransaction: React.FC<Props> = ({ transaction }: Props) => {
             />
             <Picker
                 name='type'
-                label='Tipo'
                 setValue={setValue}
                 errors={errors.type}
                 items={[
@@ -109,6 +106,7 @@ export const CreateTransaction: React.FC<Props> = ({ transaction }: Props) => {
                 trigger={trigger}
                 watch={watch}
                 editable={!isLoading}
+                placeholder='Selecione o tipo'
             />
 
             <View style={styles.buttonContainer}>
@@ -117,6 +115,7 @@ export const CreateTransaction: React.FC<Props> = ({ transaction }: Props) => {
                     title={'Salvar'}
                     color={colors.green}
                     disabled={isLoading}
+                    style={{ width: transaction ? '50%' : '100%' }}
                 />
                 {transaction && (
                     <Button
@@ -124,6 +123,7 @@ export const CreateTransaction: React.FC<Props> = ({ transaction }: Props) => {
                         title={'Excluir'}
                         color={colors.red}
                         disabled={isLoading}
+                        style={{ width: '50%' }}
                     />
                 )}
             </View>

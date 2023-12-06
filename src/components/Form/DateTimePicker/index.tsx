@@ -17,7 +17,7 @@ import { TextInputProps } from 'react-native';
 import { TextField } from '~/components/Form/TextField';
 
 interface Props {
-    label: string;
+    label?: string;
     errors: FieldError | Merge<FieldError, FieldErrorsImpl<FieldValues>>;
     setValue: UseFormSetValue<FieldValues>;
     trigger: UseFormTrigger<FieldValues>;

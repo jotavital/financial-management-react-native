@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
-import { Button, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
+import { Button } from '~/components/Common/Button';
 import { useAuth } from '~/contexts/Auth';
 import { selectUser } from '~/redux/slices/authSlice';
 import { styles } from '~/screens/Settings/styles';

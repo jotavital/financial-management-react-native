@@ -15,6 +15,7 @@ export const MainTabNavigator: React.FC = () => {
                 tabBarInactiveTintColor: colors.darkGray,
                 headerShown: false,
             }}
+            sceneContainerStyle={{ backgroundColor: colors.white }}
         >
             <Tab.Screen
                 name='Dashboard'
