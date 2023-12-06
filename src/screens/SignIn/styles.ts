@@ -11,6 +11,10 @@ const styles = StyleSheet.create({
     inputContainer: {
         display: 'flex',
         width: '85%',
+        gap: 5,
+    },
+    logoContainer: {
+        marginBottom: 30,
     },
     logo: {
         width: 300,

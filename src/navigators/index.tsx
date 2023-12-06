@@ -23,7 +23,15 @@ export const RootNavigation: React.FC = () => {
         <SafeAreaView style={{ flex: 1 }} onLayout={onLayoutRootView}>
             <StatusBar style='light' backgroundColor={colors.blue} />
 
-            <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Navigator
+                screenOptions={{
+                    headerShown: false,
+                    contentStyle: {
+                        backgroundColor: colors.white,
+                        height: '100%',
+                    },
+                }}
+            >
                 {isSignedIn ? (
                     <Stack.Screen
                         name='MainTabs'

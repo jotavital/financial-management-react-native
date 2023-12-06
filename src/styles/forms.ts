@@ -6,21 +6,20 @@ const formStyles = StyleSheet.create({
         marginBottom: 15,
     },
     input: {
-        borderColor: colors.lighGray,
-        borderWidth: 0.5,
-        borderRadius: 6,
-        padding: 6,
-        height: 43,
-        maxHeight: 43,
-        backgroundColor: colors.white,
+        borderRadius: 20,
+        padding: 10,
+        height: 46,
+        maxHeight: 46,
+        backgroundColor: colors.background,
     },
     invalid: {
         borderColor: colors.red,
         borderWidth: 0.7,
-        borderRadius: 5,
     },
     errors: {
         color: colors.red,
+        marginTop: 2,
+        marginLeft: 5,
     },
     disabled: {
         opacity: 0.4,

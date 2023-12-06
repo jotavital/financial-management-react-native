@@ -1,7 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
-import { Button, Image, Text, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
+import { Button } from '~/components/Common/Button';
 import { TextField } from '~/components/Form/TextField';
 import { useAuth } from '~/contexts/Auth';
 import { signUpSchema } from '~/screens/SignUp/schema';
@@ -26,44 +27,45 @@ export const SignUpScreen: React.FC = () => {
 
     return (
         <View style={styles.container}>
-            <Image
-                source={require('~/assets/icon-transparent.png')}
-                style={styles.logo}
-            />
-            <Text style={styles.title}>Cadastre-se</Text>
+            <View style={styles.logoContainer}>
+                <Image
+                    style={styles.logo}
+                    source={require('~/assets/icon-transparent.png')}
+                />
+            </View>
             <View style={styles.inputContainer}>
                 <TextField
-                    label='Nome'
+                    placeholder='Nome'
                     name='name'
                     control={control}
                     errors={errors.name}
-                    placeholder='João Vital'
                 />
                 <TextField
-                    label='E-mail'
+                    placeholder='E-mail'
                     name='email'
                     control={control}
                     errors={errors.email}
                     keyboardType='email-address'
-                    placeholder='joao@gmail.com'
                 />
                 <TextField
-                    label='Senha'
+                    placeholder='Senha'
                     name='password'
                     errors={errors.password}
                     control={control}
                     secureTextEntry
                 />
                 <TextField
-                    label='Confirme sua Senha'
+                    placeholder='Confirme sua Senha'
                     name='passwordConfirmation'
                     errors={errors.passwordConfirmation}
                     control={control}
                     secureTextEntry
                 />
+                <Button
+                    title='Cadastrar'
+                    onPress={handleSubmit(handleSignUp)}
+                />
             </View>
-            {/* TODO: customizar os botões do app */}
-            <Button title='Cadastrar' onPress={handleSubmit(handleSignUp)} />
             <Text style={styles.signUpText}>
                 Já tem uma conta?{' '}
                 <Text

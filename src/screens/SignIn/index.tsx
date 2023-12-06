@@ -1,8 +1,9 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
-import { Button, Image, Text, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
 import { InferType } from 'yup';
+import { Button } from '~/components/Common/Button';
 import { TextField } from '~/components/Form/TextField';
 import { useAuth } from '~/contexts/Auth';
 import { signInSchema } from '~/screens/SignIn/schema';
@@ -27,28 +28,29 @@ export const SignInScreen: React.FC = () => {
 
     return (
         <View style={styles.container}>
-            <Image
-                source={require('~/assets/icon-transparent.png')}
-                style={styles.logo}
-            />
-            <Text style={styles.title}>Bem-vindo!</Text>
+            <View style={styles.logoContainer}>
+                <Image
+                    style={styles.logo}
+                    source={require('~/assets/icon-transparent.png')}
+                />
+            </View>
             <View style={styles.inputContainer}>
                 <TextField
-                    label='E-mail'
                     name='email'
                     control={control}
                     errors={errors.email}
                     keyboardType='email-address'
+                    placeholder='E-mail'
                 />
                 <TextField
-                    label='Senha'
                     name='password'
                     control={control}
                     errors={errors.password}
                     secureTextEntry
+                    placeholder='Senha'
                 />
+                <Button title='Entrar' onPress={handleSubmit(handleSignIn)} />
             </View>
-            <Button title='Entrar' onPress={handleSubmit(handleSignIn)} />
             <Text style={styles.signUpText}>
                 Não tem uma conta?{' '}
                 <Text

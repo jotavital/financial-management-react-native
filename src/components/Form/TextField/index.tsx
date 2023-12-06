@@ -12,7 +12,7 @@ import { Label } from '~/components/Form/Label';
 import { styles } from '~/components/Form/TextField/styles';
 
 interface Props {
-    label: string;
+    label?: string;
     control: Control<FieldValues>;
     errors: FieldError | Merge<FieldError, FieldErrorsImpl<FieldValues>>;
     [x: string]: unknown;
@@ -28,7 +28,7 @@ export const TextField = <FormType extends FieldValues>({
     ...rest
 }: UseControllerProps<FormType> & Props & TextInputProps) => (
     <View style={styles.container}>
-        <Label text={label} disabled={!editable} />
+        {label ? <Label text={label} disabled={!editable} /> : null}
 
         <Controller
             control={control}
