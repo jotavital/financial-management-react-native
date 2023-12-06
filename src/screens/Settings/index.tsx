@@ -12,12 +12,16 @@ export const SettingsScreen: React.FC = () => {
 
     return (
         <View>
-            <View style={styles.userInfo}>
-                <Ionicons name='person-outline' size={60} color='black' />
-                <Text>{user?.name}</Text>
-                <Text>{user?.email}</Text>
+            <View style={styles.userInfoContainer}>
+                <View style={styles.avatar}>
+                    <Ionicons name='person-outline' size={60} color='white' />
+                </View>
+                <View>
+                    <Text style={styles.userName}>{user?.name}</Text>
+                    <Text>{user?.email}</Text>
+                </View>
             </View>
-            <View>
+            <View style={styles.buttons}>
                 <Button
                     title='Sair'
                     color={colors.red}
