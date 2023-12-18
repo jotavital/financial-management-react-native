@@ -2,13 +2,8 @@ import { CreateTransaction } from '~/components/CreateTransaction';
 
 interface Props {
     route: any;
-    navigation: any;
 }
 
-export const EditTransactionScreen: React.FC = ({
-    route,
-    navigation,
-}: Props) => {
-    // TODO transformar o form em componente
+export const EditTransactionScreen: React.FC = ({ route }: Props) => {
     return <CreateTransaction transaction={route.params} />;
 };
