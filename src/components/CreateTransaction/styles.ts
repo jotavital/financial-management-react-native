@@ -16,4 +16,10 @@ export const styles = StyleSheet.create({
     loadingContainer: {
         padding: 20,
     },
+    width100: {
+        width: '100%',
+    },
+    width50: {
+        width: '50%',
+    },
 });

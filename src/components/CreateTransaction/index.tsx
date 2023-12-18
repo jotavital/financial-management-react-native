@@ -115,7 +115,7 @@ export const CreateTransaction: React.FC<Props> = ({ transaction }: Props) => {
                     title={'Salvar'}
                     color={colors.green}
                     disabled={isLoading}
-                    style={{ width: transaction ? '50%' : '100%' }}
+                    style={transaction ? styles.width50 : styles.width100}
                 />
                 {transaction && (
                     <Button
@@ -123,7 +123,7 @@ export const CreateTransaction: React.FC<Props> = ({ transaction }: Props) => {
                         title={'Excluir'}
                         color={colors.red}
                         disabled={isLoading}
-                        style={{ width: '50%' }}
+                        style={styles.width50}
                     />
                 )}
             </View>
