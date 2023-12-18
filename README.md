@@ -15,6 +15,7 @@ This project is up using:
 * Husky
 * ESLint
 * Prettier
+* Lint Staged
 * Babel
 
 # How to run
