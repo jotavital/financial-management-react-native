@@ -2,32 +2,32 @@ import { StyleSheet } from 'react-native';
 import { colors } from '~/styles/colors';
 
 const styles = StyleSheet.create({
-    row: {
-        display: 'flex',
-        flexDirection: 'row',
-    },
-    cell: {
-        height: 'auto',
-        display: 'flex',
-        padding: 10,
-        flexGrow: 1,
-        flexBasis: 0,
+    borderBottom: {
+        borderBottomColor: colors.darkGray,
+        borderBottomWidth: 0.5,
     },
     borderRight: {
         borderRightColor: colors.darkGray,
         borderRightWidth: 0.5,
     },
-    borderBottom: {
-        borderBottomColor: colors.darkGray,
-        borderBottomWidth: 0.5,
+    cell: {
+        display: 'flex',
+        flexBasis: 0,
+        flexGrow: 1,
+        height: 'auto',
+        padding: 10,
     },
     empty: {
-        padding: 10,
         justifyContent: 'center',
+        padding: 10,
     },
     emptyText: {
         fontSize: 15,
         fontWeight: 'bold',
+    },
+    row: {
+        display: 'flex',
+        flexDirection: 'row',
     },
 });
 

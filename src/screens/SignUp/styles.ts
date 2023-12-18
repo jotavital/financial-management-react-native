@@ -3,31 +3,31 @@ import { colors } from '~/styles/colors';
 
 const styles = StyleSheet.create({
     container: {
-        display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
+        display: 'flex',
         height: '100%',
+        justifyContent: 'center',
     },
     inputContainer: {
         display: 'flex',
-        width: '85%',
         gap: 5,
+        width: '85%',
+    },
+    link: {
+        color: colors.blue,
+        fontSize: 14,
+        textDecorationLine: 'underline',
+    },
+    logo: {
+        height: 160,
+        width: 250,
     },
     logoContainer: {
         marginBottom: 30,
     },
-    logo: {
-        width: 250,
-        height: 160,
-    },
     signUpText: {
         fontSize: 13,
         marginTop: 20,
-    },
-    link: {
-        textDecorationLine: 'underline',
-        color: colors.blue,
-        fontSize: 14,
     },
 });
 

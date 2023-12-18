@@ -2,31 +2,31 @@ import { StyleSheet } from 'react-native';
 import { colors } from '~/styles/colors';
 
 const styles = StyleSheet.create({
-    headerItem: {
-        height: 'auto',
+    borderRight: {
+        borderRightColor: colors.darkGray,
+        borderRightWidth: 0.5,
+    },
+    headerCell: {
+        borderBottomColor: colors.darkGray,
+        borderBottomWidth: 0.5,
         display: 'flex',
+        flexBasis: 0,
         flexGrow: 1,
+        height: 'auto',
         padding: 10,
     },
     headerContainer: {
         display: 'flex',
         flexDirection: 'row',
     },
-    headerCell: {
-        height: 'auto',
+    headerItem: {
         display: 'flex',
-        padding: 10,
         flexGrow: 1,
-        flexBasis: 0,
-        borderBottomColor: colors.darkGray,
-        borderBottomWidth: 0.5,
+        height: 'auto',
+        padding: 10,
     },
     headerText: {
         fontWeight: 'bold',
-    },
-    borderRight: {
-        borderRightColor: colors.darkGray,
-        borderRightWidth: 0.5,
     },
 });
 

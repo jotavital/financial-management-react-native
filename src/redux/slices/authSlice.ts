@@ -7,7 +7,7 @@ import { UserBasicInfo } from '~/types/user';
 export const getUserFromStorage = createAsyncThunk(
     'auth/getUserFromStorage',
     async () => {
-        let user = await getItemAsync('user');
+        const user = await getItemAsync('user');
         return JSON.parse(user) as UserBasicInfo;
     }
 );

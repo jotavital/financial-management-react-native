@@ -3,36 +3,36 @@ import { colors } from '~/styles/colors';
 
 const styles = StyleSheet.create({
     container: {
-        display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
+        display: 'flex',
         height: '100%',
+        justifyContent: 'center',
     },
     inputContainer: {
         display: 'flex',
-        width: '85%',
         gap: 5,
+        width: '85%',
+    },
+    link: {
+        color: colors.blue,
+        fontSize: 14,
+        textDecorationLine: 'underline',
+    },
+    logo: {
+        height: 200,
+        width: 300,
     },
     logoContainer: {
         marginBottom: 30,
-    },
-    logo: {
-        width: 300,
-        height: 200,
-    },
-    title: {
-        fontSize: 30,
-        fontWeight: 'bold',
-        marginBottom: 20,
     },
     signUpText: {
         fontSize: 13,
         marginTop: 20,
     },
-    link: {
-        textDecorationLine: 'underline',
-        color: colors.blue,
-        fontSize: 14,
+    title: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        marginBottom: 20,
     },
 });
 

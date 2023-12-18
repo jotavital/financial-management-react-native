@@ -5,24 +5,24 @@ const formStyles = StyleSheet.create({
     container: {
         marginBottom: 15,
     },
+    disabled: {
+        opacity: 0.4,
+    },
+    errors: {
+        color: colors.red,
+        marginLeft: 5,
+        marginTop: 2,
+    },
     input: {
+        backgroundColor: colors.background,
         borderRadius: 20,
-        padding: 10,
         height: 46,
         maxHeight: 46,
-        backgroundColor: colors.background,
+        padding: 10,
     },
     invalid: {
         borderColor: colors.red,
         borderWidth: 0.7,
-    },
-    errors: {
-        color: colors.red,
-        marginTop: 2,
-        marginLeft: 5,
-    },
-    disabled: {
-        opacity: 0.4,
     },
 });
 

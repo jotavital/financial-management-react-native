@@ -1,10 +1,19 @@
 /* eslint-env node */
 module.exports = {
-    extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+    extends: [
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:react-native/all',
+    ],
     parser: '@typescript-eslint/parser',
-    plugins: ['@typescript-eslint'],
+    plugins: ['@typescript-eslint', 'react-native'],
     root: true,
-    rules: {
-        '@typescript-eslint/ban-ts-comment': 'off',
+    parserOptions: {
+        ecmaFeatures: {
+            jsx: true,
+        },
+    },
+    env: {
+        'react-native/react-native': true,
     },
 };

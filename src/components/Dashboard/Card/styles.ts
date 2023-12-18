@@ -2,33 +2,33 @@ import { StyleSheet } from 'react-native';
 import { colors } from '~/styles/colors';
 
 const styles = StyleSheet.create({
-    card: {
-        width: '90%',
-        height: 100,
-        backgroundColor: colors.white,
-        borderRadius: 7,
-        elevation: 5,
-        shadowColor: colors.black,
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingHorizontal: 10,
-    },
     amountContainer: {
-        width: '50%',
         display: 'flex',
         justifyContent: 'center',
+        width: '50%',
     },
     amountText: {
         fontSize: 25,
         fontWeight: 'bold',
     },
-    title: {
-        fontSize: 16,
+    card: {
+        backgroundColor: colors.white,
+        borderRadius: 7,
+        display: 'flex',
+        elevation: 5,
+        flexDirection: 'row',
+        height: 100,
+        justifyContent: 'space-between',
+        paddingHorizontal: 10,
+        shadowColor: colors.black,
+        width: '90%',
     },
     iconContainer: {
         display: 'flex',
         justifyContent: 'center',
+    },
+    title: {
+        fontSize: 16,
     },
 });
 

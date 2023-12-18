@@ -6,24 +6,24 @@ export const styles = StyleSheet.create({
         display: 'flex',
         gap: 12,
     },
-    title: {
-        fontWeight: '400',
-        fontSize: 20,
-    },
     header: {
+        alignItems: 'center',
         display: 'flex',
         flexDirection: 'row',
-        alignItems: 'center',
         justifyContent: 'space-between',
     },
     seeAll: {
+        alignItems: 'center',
         display: 'flex',
         flexDirection: 'row',
         height: '100%',
-        alignItems: 'center',
     },
     seeAllText: {
         color: colors.blue,
         fontSize: 15,
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: '400',
     },
 });
