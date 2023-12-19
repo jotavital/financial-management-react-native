@@ -38,8 +38,8 @@ export const MainTabNavigator: React.FC = () => {
                             color={color}
                         />
                     ),
-                    tabBarLabel: 'Nova Movimentação',
-                    headerTitle: 'Nova Movimentação',
+                    tabBarLabel: 'Nova Transação',
+                    headerTitle: 'Nova Transação',
                 }}
             />
             <Tab.Screen

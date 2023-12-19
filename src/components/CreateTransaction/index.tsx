@@ -47,7 +47,7 @@ export const CreateTransaction: React.FC<Props> = ({ transaction }: Props) => {
     };
 
     const handleConfirmDelete = (transactionId: string) => {
-        Alert.alert('Tem certeza?', 'Deseja mesmo deletar esta movimentação?', [
+        Alert.alert('Tem certeza?', 'Deseja mesmo deletar esta transação?', [
             {
                 text: 'Voltar',
                 style: 'cancel',

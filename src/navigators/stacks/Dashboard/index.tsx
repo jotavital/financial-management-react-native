@@ -21,7 +21,7 @@ export const DashboardStackNavigator: React.FC = () => {
             <Stack.Screen
                 name='EditTransaction'
                 component={EditTransactionScreen}
-                options={{ headerTitle: 'Editar movimentação' }}
+                options={{ headerTitle: 'Editar transação' }}
             />
         </Stack.Navigator>
     );
