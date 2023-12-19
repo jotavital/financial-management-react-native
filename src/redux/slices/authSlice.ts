@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { deleteItemAsync, getItemAsync, setItemAsync } from 'expo-secure-store';
 import { RootState } from '~/redux/store';
 import { SignInResponse } from '~/types/signIn';
-import { UserBasicInfo } from '~/types/user';
+import { UserBasicInfo, UserProps } from '~/types/user';
 
 export const getUserFromStorage = createAsyncThunk(
     'auth/getUserFromStorage',
@@ -41,6 +41,16 @@ export const authSlice = createSlice({
 
             state.isSignedIn = false;
         },
+        userUpdated: (
+            state,
+            action: {
+                payload: { user: UserProps };
+            }
+        ) => {
+            setItemAsync('user', JSON.stringify(action.payload.user));
+
+            state.user = action.payload.user;
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(getUserFromStorage.fulfilled, (state, action) => {
@@ -49,7 +59,7 @@ export const authSlice = createSlice({
     },
 });
 
-export const { signIn, signOut } = authSlice.actions;
+export const { signIn, signOut, userUpdated } = authSlice.actions;
 
 export const selectIsSignedIn = (state: RootState) => state.isSignedIn;
 export const selectUser = (state: RootState) => state.user;

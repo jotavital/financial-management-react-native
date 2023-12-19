@@ -1,11 +1,13 @@
 import { AntDesign, Feather, Ionicons } from '@expo/vector-icons';
 import { useRef, useState } from 'react';
 import { Pressable, Text, TextInput, View } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '~/components/Common/Button';
 import { useAuth } from '~/contexts/Auth';
-import { selectUser } from '~/redux/slices/authSlice';
+import { selectUser, userUpdated } from '~/redux/slices/authSlice';
 import { styles } from '~/screens/Settings/styles';
+import { toast } from '~/services/toast.android';
+import { updateUser } from '~/services/user';
 import { colors } from '~/styles/colors';
 
 export const SettingsScreen: React.FC = () => {
@@ -14,6 +16,7 @@ export const SettingsScreen: React.FC = () => {
     const nameInputRef = useRef<TextInput>(null);
     const [name, setName] = useState<string>(user.name);
     const [isEditing, setIsEditing] = useState<boolean>(false);
+    const dispatch = useDispatch();
 
     const handleEditProfileInfo = () => {
         setIsEditing(true);
@@ -25,6 +28,12 @@ export const SettingsScreen: React.FC = () => {
         setIsEditing(false);
 
         nameInputRef.current.blur();
+
+        updateUser({ name }).then(({ data: user }) => {
+            dispatch(userUpdated({ user }));
+
+            toast.show('Dados salvos com sucesso');
+        });
     };
 
     return (

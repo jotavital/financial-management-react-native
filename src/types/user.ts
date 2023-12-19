@@ -9,6 +9,10 @@ export interface UserProps {
     updatedAt: Date;
 }
 
+export interface UpdateUserData {
+    name: string;
+}
+
 export interface UserBasicInfo {
     name: string;
     email: string;

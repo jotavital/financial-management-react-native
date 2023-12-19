@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { createContext, useContext, useState } from 'react';
-import { ToastAndroid } from 'react-native';
 import api from '~/services/api';
+import { toast } from '~/services/toast.android';
 import { TransactionProps, TransactionsTotalsProps } from '~/types/transaction';
 
 interface TransactionContextValue {
@@ -76,7 +76,7 @@ export const TransactionsProvider = ({ children }) => {
     ) => {
         api.post(`transactions`, attributes).then(() => {
             reset();
-            ToastAndroid.show('Dados salvos com sucesso.', ToastAndroid.SHORT);
+            toast.show('Dados salvos com sucesso.');
         });
     };
 
@@ -86,10 +86,7 @@ export const TransactionsProvider = ({ children }) => {
     ) => {
         api.put(`transactions/${transactionId}`, attributes).then(
             (response) => {
-                ToastAndroid.show(
-                    'Dados salvos com sucesso.',
-                    ToastAndroid.SHORT
-                );
+                toast.show('Dados salvos com sucesso.');
 
                 if (response) {
                     navigation.goBack();
@@ -104,7 +101,6 @@ export const TransactionsProvider = ({ children }) => {
         api.delete(`transactions/${transactionId}`)
             .then((response) => {
                 if (response) {
-                    // @ts-ignore
                     navigation.goBack();
                 }
             })

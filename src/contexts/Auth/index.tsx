@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { getItemAsync } from 'expo-secure-store';
 import { createContext, useContext, useEffect } from 'react';
-import { ToastAndroid } from 'react-native';
 import { useDispatch } from 'react-redux';
 import {
     signIn as dispatchSignIn,
@@ -9,6 +8,7 @@ import {
     getUserFromStorage,
 } from '~/redux/slices/authSlice';
 import api from '~/services/api';
+import { toast } from '~/services/toast.android';
 import { SignInResponse, SignInSchema } from '~/types/signIn';
 import { SignUpSchema } from '~/types/signUp';
 
@@ -22,14 +22,11 @@ const AuthContext = createContext<AuthContextValue>({} as AuthContextValue);
 
 export const AuthProvider = ({ children }) => {
     const navigation = useNavigation();
-    const dispatch = useDispatch<any>();
+    const dispatch = useDispatch();
 
     const signUp = async (data: SignUpSchema) => {
         api.post('users', data).then(() => {
-            ToastAndroid.show(
-                'Cadastro realizado com sucesso.',
-                ToastAndroid.SHORT
-            );
+            toast.show('Cadastro realizado com sucesso.');
 
             navigation.navigate('SignIn' as never);
         });
@@ -58,7 +55,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     useEffect(() => {
-        const getItems = async () => {
+        const getAuthInfoFromStorage = async () => {
             const token = await getItemAsync('authToken');
             const user = await getItemAsync('user');
 
@@ -70,7 +67,7 @@ export const AuthProvider = ({ children }) => {
             dispatch(dispatchSignOut());
         };
 
-        getItems();
+        getAuthInfoFromStorage();
     }, []);
 
     return (
