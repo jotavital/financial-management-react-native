@@ -1,24 +1,24 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '~/styles/colors';
 
 export const styles = StyleSheet.create({
     avatar: {
-        backgroundColor: colors.lighGray,
-        borderRadius: 50,
-        margin: 10,
-        marginRight: 15,
-        padding: 10,
+        borderRadius: 100,
+        flexGrow: 1,
+        width: '100%',
+    },
+    avatarContainer: {
+        flexGrow: 1,
+        padding: 5,
     },
     buttons: {
         padding: 20,
     },
     userInfo: {
         alignItems: 'center',
-        display: 'flex',
         flexDirection: 'row',
+        flexGrow: 2,
         justifyContent: 'space-between',
         padding: 10,
-        width: '75%',
     },
     userInfoContainer: {
         alignItems: 'center',

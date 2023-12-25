@@ -16,4 +16,7 @@ module.exports = {
     env: {
         'react-native/react-native': true,
     },
+    rules: {
+        'react-native/split-platform-components': 'off',
+    },
 };

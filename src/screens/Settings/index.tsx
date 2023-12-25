@@ -1,11 +1,14 @@
-import { AntDesign, Feather, Ionicons } from '@expo/vector-icons';
+import { AntDesign, Feather } from '@expo/vector-icons';
+import { Image } from 'expo-image';
+import * as ImagePicker from 'expo-image-picker';
 import { useRef, useState } from 'react';
-import { Pressable, Text, TextInput, View } from 'react-native';
+import { Pressable, Text, TextInput, ToastAndroid, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '~/components/Common/Button';
 import { useAuth } from '~/contexts/Auth';
 import { selectUser, userUpdated } from '~/redux/slices/authSlice';
 import { styles } from '~/screens/Settings/styles';
+import api from '~/services/api';
 import { toast } from '~/services/toast.android';
 import { updateUser } from '~/services/user';
 import { colors } from '~/styles/colors';
@@ -36,12 +39,57 @@ export const SettingsScreen: React.FC = () => {
         });
     };
 
+    const handlePickImage = async () => {
+        const { status } =
+            await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+        if (status !== 'granted') {
+            toast.show(
+                'É necessário permitir o acesso às fotos e vídeos para continuar.',
+                ToastAndroid.LONG
+            );
+        }
+
+        const pickerResult = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            aspect: [4, 3],
+        });
+
+        if (pickerResult.canceled === true) {
+            return;
+        }
+
+        const data = new FormData();
+        data.append('avatar', {
+            uri: pickerResult.assets[0].uri,
+            name: pickerResult.assets[0].uri.split('/').pop(),
+            type: 'image/jpeg',
+        });
+
+        api.put('users/avatar', data, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+            .then(() => toast.show('Perfil atualizado com sucesso'))
+            .catch((error) => console.log(error));
+    };
+
     return (
         <View>
             <View style={styles.userInfoContainer}>
-                <View style={styles.avatar}>
-                    <Ionicons name='person-outline' size={60} color='white' />
-                </View>
+                <Pressable
+                    style={styles.avatarContainer}
+                    android_ripple={{ color: colors.background }}
+                    onPress={() => handlePickImage()}
+                >
+                    <Image
+                        style={styles.avatar}
+                        source='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQDGQ55_znshhGDlxv5sDZz96tD3hxPc5j8CVWMKvJcw&s'
+                        contentFit='cover'
+                        transition={1000}
+                    />
+                </Pressable>
 
                 <View style={styles.userInfo}>
                     <View>
