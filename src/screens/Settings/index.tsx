@@ -20,7 +20,9 @@ export const SettingsScreen: React.FC = () => {
     const nameInputRef = useRef<TextInput>(null);
     const [name, setName] = useState<string>(user.name);
     const [isEditing, setIsEditing] = useState<boolean>(false);
-    const [avatarSource, setAvatarSource] = useState<string>(user.avatar);
+    const [avatarSource, setAvatarSource] = useState<string>(
+        user.avatar ?? undefined
+    );
     const dispatch = useDispatch();
 
     const handleEditProfileInfo = () => {
@@ -75,6 +77,7 @@ export const SettingsScreen: React.FC = () => {
         }).then(({ data: user }) => {
             toast.show('Perfil atualizado com sucesso');
 
+            setAvatarSource(user.avatar);
             dispatch(userUpdated({ user }));
         });
     };

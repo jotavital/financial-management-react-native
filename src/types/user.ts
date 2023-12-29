@@ -4,6 +4,7 @@ export interface UserProps {
     _id: string;
     name: string;
     email: string;
+    avatar?: string;
     transactions: TransactionProps[];
     createdAt: Date;
     updatedAt: Date;
