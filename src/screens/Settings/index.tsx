@@ -12,6 +12,7 @@ import api from '~/services/api';
 import { toast } from '~/services/toast.android';
 import { updateUser } from '~/services/user';
 import { colors } from '~/styles/colors';
+import { UserProps } from '~/types/user';
 
 export const SettingsScreen: React.FC = () => {
     const { signOut } = useAuth();
@@ -19,6 +20,7 @@ export const SettingsScreen: React.FC = () => {
     const nameInputRef = useRef<TextInput>(null);
     const [name, setName] = useState<string>(user.name);
     const [isEditing, setIsEditing] = useState<boolean>(false);
+    const [avatarSource, setAvatarSource] = useState<string>(user.avatar);
     const dispatch = useDispatch();
 
     const handleEditProfileInfo = () => {
@@ -66,13 +68,15 @@ export const SettingsScreen: React.FC = () => {
             type: 'image/jpeg',
         });
 
-        api.put('users/avatar', data, {
+        api.put<UserProps>('users/avatar', data, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
-        })
-            .then(() => toast.show('Perfil atualizado com sucesso'))
-            .catch((error) => console.log(error));
+        }).then(({ data: user }) => {
+            toast.show('Perfil atualizado com sucesso');
+
+            dispatch(userUpdated({ user }));
+        });
     };
 
     return (
@@ -85,9 +89,14 @@ export const SettingsScreen: React.FC = () => {
                 >
                     <Image
                         style={styles.avatar}
-                        source='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQDGQ55_znshhGDlxv5sDZz96tD3hxPc5j8CVWMKvJcw&s'
+                        source={avatarSource}
                         contentFit='cover'
                         transition={1000}
+                        onError={() =>
+                            setAvatarSource(
+                                'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'
+                            )
+                        }
                     />
                 </Pressable>
 

@@ -16,4 +16,5 @@ export interface UpdateUserData {
 export interface UserBasicInfo {
     name: string;
     email: string;
+    avatar?: string;
 }
